@@ -3,11 +3,11 @@
 
 ### Analysis
 
-Urban cities have 78.1% of Pyber drivers, 67.5% of total rides, and 62% of the total fares.  In this case correlation could mean causation; the data shows a relevant relationship between supply and demand.  Drivers > Riders > Fares could mean as more drivers enter the market, the fare price goes down; the market becomes more competitive for drivers.
+Urban cities have 77.9% of Pyber drivers, 67.5% of total rides, and 62% of the total fares.  In this case correlation could mean causation; the data shows a relevant relationship between supply and demand.  Drivers > Riders > Fares could mean as more drivers enter the market, the fare price goes down; the market becomes more competitive for drivers.
 
 Inversely to the first observable trend, the less competitive rural market results in fewer rides but higher average fares for these municipalities.
 
-In terms of competition, the Suburban market was the best place to be a driver in 2016.  18.8% of Pyber drivers in these markets accounted for 31.4% of total fares.
+In terms of competition, the Suburban market was the best place to be a driver in 2016.  19% of Pyber drivers in these markets accounted for 31.4% of total fares.
 
 
 ```python
@@ -177,9 +177,13 @@ plt.show()
 
 
 ```python
+ud=pyber[pyber['type']=='Urban'].groupby(['city'])['driver_count'].first()
+sd=pyber[pyber['type']=='Suburban'].groupby(['city'])['driver_count'].first()
+rd=pyber[pyber['type']=='Rural'].groupby(['city'])['driver_count'].first()
+
 plt.figure(figsize=(9,6))
 plt.title('% of Total Drivers by City Type')
-plt.pie([unumdriv.sum(),snumdriv.sum(),rnumdriv.sum()], explode=[0.07,0,0], labels=['Urban','Suburban','Rural'], colors=['lightcoral','lightskyblue','gold'],
+plt.pie([ud.sum(),sd.sum(),rd.sum()], explode=[0.07,0,0], labels=['Urban','Suburban','Rural'], colors=['lightcoral','lightskyblue','gold'],
         autopct="%1.1f%%", shadow=True, startangle=240)
 plt.show()
 ```
