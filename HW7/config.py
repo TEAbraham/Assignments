@@ -1,6 +1,0 @@
-consumer_key = "ObkGIwWGbuMxzNPMFIkiXujAQ"
-consumer_secret = "kUBgLkBCqgGzrAuxzqduhfNnHL5qum5P7x3TTWykMT2JxahZjj"
-access_token = "1908833184-Ed3O2Lz7SZXeoeI0GoEzqPYhoCQXgu8gurJN3M0"
-access_token_secret = "1yRJhUVLCqZVyJTyYWiyu56ep25oI09nuZgawStbM8DeZ"
-gkey = "AIzaSyBz6KHF8ykRnjY8vXXvj1fQcoVZcw0QusQ"
-owmkey = "0b37b8414031b72ca24d1c193bb51f0c"
