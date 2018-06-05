@@ -66,8 +66,6 @@ for i in range(1,11):
         url = (f'http://api.openweathermap.org/data/2.5/weather?{a}&units=Imperial&APPID={owmkey}')
         forecast = requests.get(url).json()
         Date.append(forecast['dt'])
-        #Lat.append(forecast['coord']['lat'])
-        #Lat.append(forecast['coord']['lat'])
         Cloudiness.append(forecast['clouds']['all'])
         Humidity.append(forecast['main']['humidity'])
         MaxTemp.append(forecast['main']['temp_max'])
