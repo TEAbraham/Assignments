@@ -1,32 +1,25 @@
-import pandas as pd
+import datetime as dt
 import numpy as np
-import pymysql
-pymysql.install_as_MySQLdb()
+import pandas as pd
+
 import sqlalchemy
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, inspect, func
-from sqlalchemy import Column, Integer, String, Float, Table, ForeignKey
+from sqlalchemy import create_engine, func, MetaData
+
 from flask import Flask, jsonify
-import matplotlib.pyplot as plt
-import matplotlib
-from datetime import datetime,timedelta
 
-
-app = Flask(__name__)
-
-engine = create_engine("sqlite:///hawaii.sqlite", echo=False)
-conn = engine.connect()
-
+engine = create_engine('sqlite:///:memory:')
+metadata = MetaData(bind=engine)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
-Base.classes.keys()
 
-measurements = Base.classes.measurements
 stations = Base.classes.stations
+measurements = Base.classes.measurements
 
 session = Session(engine)
+
+app = Flask(__name__)
 
 def currentday():
     today = datetime.now()
