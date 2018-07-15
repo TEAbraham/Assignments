@@ -1224,8 +1224,6 @@ sns.regplot(x=Data.Lat.astype('float64'), y=Data['Max Temp'], fit_reg=False,mark
 plt.title(f"City Latitude vs Max Temperature ({dt.date.today()})")
 plt.ylabel("Max Temperature (F)")
 plt.xlabel("Latitude")
-plt.ylim(-100,150)
-plt.xlim(-80,100)
 
 plt.show()
  
@@ -1237,7 +1235,7 @@ plt.savefig("LatitudevsTemperaturePlot.png")
 
 
 
-    <matplotlib.figure.Figure at 0x11216f240>
+    <Figure size 432x288 with 0 Axes>
 
 
 ## Latitude vs Humidity Plot
@@ -1249,8 +1247,6 @@ sns.regplot(x=Data.Lat.astype('float64'), y=Data.Humidity, fit_reg=False,marker=
 plt.title(f"City Latitude vs Humidity ({dt.date.today()})")
 plt.ylabel("Humidity (%)")
 plt.xlabel("Latitude")
-plt.ylim(-20,120)
-plt.xlim(-80,100)
 
 plt.show()
  
@@ -1262,7 +1258,7 @@ plt.savefig("LatitudevsHumidityPlot.png")
 
 
 
-    <matplotlib.figure.Figure at 0x1184c0dd8>
+    <Figure size 432x288 with 0 Axes>
 
 
 ## Latitude vs Cloudiness Plot
@@ -1274,8 +1270,7 @@ sns.regplot(x=Data.Lat.astype('float64'), y=Data.Cloudiness, fit_reg=False,marke
 plt.title(f"City Latitude vs Cloudiness ({dt.date.today()})")
 plt.ylabel("Cloudiness (%)")
 plt.xlabel("Latitude")
-plt.ylim(-20,120)
-plt.xlim(-80,100)
+
 
 plt.show()
  
@@ -1287,7 +1282,7 @@ plt.savefig("LatitudevsCloudinessPlot.png")
 
 
 
-    <matplotlib.figure.Figure at 0x118588cf8>
+    <Figure size 432x288 with 0 Axes>
 
 
 ## Latitude vs Wind Speed Plot
@@ -1299,8 +1294,6 @@ sns.regplot(x=Data.Lat.astype('float64'), y=Data['Wind Speed'], fit_reg=False,ma
 plt.title(f"City Latitude vs Wind Speed ({dt.date.today()})")
 plt.ylabel("Wind Speed (mph)")
 plt.xlabel("Latitude")
-plt.ylim(-5,40)
-plt.xlim(-80,100)
 
 plt.show()
  
@@ -1312,5 +1305,5 @@ plt.savefig("LatitudevsWindSpeedPlot.png")
 
 
 
-    <matplotlib.figure.Figure at 0x1a1b973da0>
+    <Figure size 432x288 with 0 Axes>
 
