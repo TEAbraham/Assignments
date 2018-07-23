@@ -4,15 +4,10 @@ from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import requests as req
 
-
-def init_browser():
+def scrape():
     executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
     browser = Browser("chrome", **executable_path, headless=False)
 
-
-def scrape():
-
-    browser = init_browser()
     mars_data = {}
 
 
@@ -54,7 +49,7 @@ def scrape():
     table_read = pd.read_html(request.text)
     mars_facts = pd.DataFrame(table_read[0])
     mars_facts.columns = ["Description","Value"]
-    mars_facts_html = mars_facts.to_html(header=False, index=False)
+    mars_facts_html = mars_facts.to_html(index=False)
     mars_data["fact_table"] = mars_facts_html
 
     # scrape images of Mars' hemispheres from the USGS site

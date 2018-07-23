@@ -1,4 +1,3 @@
-# import necessary libraries
 from flask import Flask, render_template
 import pymongo
 import scrape_mars
@@ -13,15 +12,11 @@ collection = db.mars_data_entries
 
 @app.route("/")
 def home():
-    mars_data = list(db.collection.find())[0]
-    return  render_template('index.html', mars_data=mars_data)
-
-@app.route("/scrape")
-def web_scrape():
+    mars_data = db.collection.find_one()
     db.collection.remove({})
     mars_data = scrape_mars.scrape()
     db.collection.insert_one(mars_data)
-    return  render_template('scrape.html')
+    return  render_template('index.html', mars_data=mars_data)
 
 if __name__ == "__main__":
     app.run(debug=True)
