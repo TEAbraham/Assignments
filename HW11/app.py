@@ -12,7 +12,7 @@ collection = db.mars_data_entries
 
 @app.route("/")
 def home():
-    mars_data = db.collection.find_one()
+    
     db.collection.remove({})
     mars_data = scrape_mars.scrape()
     db.collection.insert_one(mars_data)
