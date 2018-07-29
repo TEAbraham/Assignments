@@ -36,10 +36,10 @@ function handleFilterButtonClick() {
 
   // format the user search criteria
   var filterDate = dateInput.value;
-  var filterState = stateInput.value.trim().toLowerCase();
-  var filterCity = cityInput.value.trim().toLowerCase();
-  var filterCountry = countryInput.value.trim().toLowerCase();
-  var filterShape = shapeInput.value.trim().toLowerCase();
+  var filterState = stateInput.value.toLowerCase();
+  var filterCity = cityInput.value.toLowerCase();
+  var filterCountry = countryInput.value.toLowerCase();
+  var filterShape = shapeInput.value.toLowerCase();
 
   // filters
 
