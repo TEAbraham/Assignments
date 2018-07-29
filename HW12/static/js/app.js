@@ -47,7 +47,7 @@ function handleFilterButtonClick() {
   // filters
   switch (true){
   case condition1:
-    (filterDate != "")
+    if (filterDate != "")
     {
     tableData = data.filter(function(address) 
     {
@@ -57,7 +57,7 @@ function handleFilterButtonClick() {
     }
     break;
   case condition2:
-    (filterState != "")
+    if (filterState != "")
     {
     tableData = tableData.filter(function(address)
     {
@@ -67,7 +67,7 @@ function handleFilterButtonClick() {
     }
     break;
   case conditon3:
-    (filterCity != "")
+    if (filterCity != "")
     {
     tableData = tableData.filter(function(address)
     {
@@ -77,7 +77,7 @@ function handleFilterButtonClick() {
     }
     break;
   case condition4:
-    (filterCountry != "")
+    if (filterCountry != "")
     {
     tableData = tableData.filter(function(address)
     {
@@ -87,7 +87,7 @@ function handleFilterButtonClick() {
     }
     break;
   case condition5:
-    (filterShape != "")
+    if (filterShape != "")
     {
     tableData = tableData.filter(function(address)
     {
@@ -97,7 +97,7 @@ function handleFilterButtonClick() {
     }
     break;
   default:
-    {tableData};
+    {tableData=tableData};
     }
 }
 
