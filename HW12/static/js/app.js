@@ -104,7 +104,7 @@ function handleFilterButtonClick() {
 
 
 
-var table = $('#ufo-table').DataTable();
+var table = $('#ufo-table').dataTable();
  
 table.columns().flatten().each( function ( colIdx ) {
     // Create the select list and search operation
