@@ -99,9 +99,7 @@ var $shapeInput = document.querySelector("#shape");
 
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
-$filterBtn.addEventListener("click", handleFilterButtonClick, function(event){
-    event.preventDefault()
-});
+$filterBtn.addEventListener("click", handleFilterButtonClick);
 
 // Set filteredAddresses to dataSet initially
 var filteredTable = data;
