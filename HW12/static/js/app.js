@@ -23,6 +23,7 @@ renderTable();
 
 function handleFilterButtonClick() {
     
+    console.log("Filtered Return")
     d3.event.preventDefault();
     d3.event.target.value.trim().toLowerCase();
 
