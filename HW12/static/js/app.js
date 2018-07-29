@@ -31,6 +31,9 @@ function renderTable() {
 renderTable();
 
 function handleFilterButtonClick() {
+    
+  d3.event.preventDefault();
+
   // format the user search criteria
   var filterDate = dateInput.value;
   var filterState = stateInput.value.trim().toLowerCase();
@@ -39,8 +42,7 @@ function handleFilterButtonClick() {
   var filterShape = shapeInput.value.trim().toLowerCase();
 
   // filters
-  switch (true){
-  case condition1:
+
     if (filterDate != "")
     {
     tableData = data.filter(function(address) 
@@ -49,8 +51,7 @@ function handleFilterButtonClick() {
         return addressDate === filterDate;
     });
     }
-    break;
-  case condition2:
+    else {tableData};
     if (filterState != "")
     {
     tableData = tableData.filter(function(address)
@@ -59,8 +60,7 @@ function handleFilterButtonClick() {
         return addressState === filterState;
     });
     }
-    break;
-  case conditon3:
+    else {tableData};
     if (filterCity != "")
     {
     tableData = tableData.filter(function(address)
@@ -69,8 +69,7 @@ function handleFilterButtonClick() {
         return addressCity === filterCity;
     });
     }
-    break;
-  case condition4:
+    else {tableData};
     if (filterCountry != "")
     {
     tableData = tableData.filter(function(address)
@@ -79,8 +78,7 @@ function handleFilterButtonClick() {
         return addressCountry === filterCountry;
     });
     }
-    break;
-  case condition5:
+    else {tableData};
     if (filterShape != "")
     {
     tableData = tableData.filter(function(address)
@@ -89,9 +87,6 @@ function handleFilterButtonClick() {
         return addressShape === filterShape;
     });
     }
-    break;
-  default:
-    {tableData=tableData};
-    }
+    else {tableData};
 }
 
