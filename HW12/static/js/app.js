@@ -2,7 +2,7 @@
 var tableData = data;
 
 // // tbody, inputs and button
-// var $tbody = document.querySelector("tbody");
+var $tbody = document.querySelector("tbody");
 // var $dateInput = document.querySelector("#datetime");
 // var $stateInput = document.querySelector("#state");
 // var $cityInput = document.querySelector("#city");
