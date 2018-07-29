@@ -49,7 +49,7 @@ filterCountry = filterCountry.trim().toLowerCase()
 filterShape = filterShape.trim().toLowerCase()
   // filters
 
-    if (filterDate != ""){
+    if (filterDate.length != 0){
         tableData = data.filter(function(address){
             var addressDate = address.datetime; 
             return addressDate === filterDate;
@@ -57,7 +57,7 @@ filterShape = filterShape.trim().toLowerCase()
         }
     else {tableData=data};
 
-    if (filterDate != ""){
+    if (filterDate.length != 0){
         tableData = data.filter(function(address){
             var addressState = address.state; 
             return addressState === filterState;
@@ -65,7 +65,7 @@ filterShape = filterShape.trim().toLowerCase()
         }
     else {tableData=tableData};
 
-    if (filterDate != ""){
+    if (filterDate.length != 0){
         tableData = data.filter(function(address){
             var addressCity = address.city; 
             return addressCity === filterCity;
@@ -74,7 +74,7 @@ filterShape = filterShape.trim().toLowerCase()
         
     else {tableData=tableData};
 
-    if (filterDate != ""){
+    if (filterDate.length != 0){
         tableData = data.filter(function(address){
             var addressCountry = address.country; 
             return addressCountry === filterCountry;
@@ -82,7 +82,7 @@ filterShape = filterShape.trim().toLowerCase()
         }
     else {tableData=tableData};
 
-    if (filterDate != ""){
+    if (filterDate.length != 0){
         tableData = data.filter(function(address){
             var addressShape = address.shape; 
             return addressShape === filterShape;
