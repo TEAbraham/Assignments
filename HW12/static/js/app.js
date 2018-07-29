@@ -104,6 +104,8 @@ function handleFilterButtonClick() {
 
 
 
-document.ready(function() {
-  $('#ufo-table').DataTable();
-});
+$(document).ready(function() {
+    $('#ufo-table').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
