@@ -3,13 +3,7 @@ var tableData = data;
 
 // // tbody, inputs and button
 var tbody = d3.select("tbody");
-var dateInput = d3.select("#datetime");
-var stateInput = d3.select("#state");
-var cityInput = d3.select("#city");
-var countryInput = d3.select("#country");
-var shapeInput = d3.select("#shape");
 var filterBtn = d3.select("#filter-btn");
-
 
 // event listener for searchButton
 filterBtn.on("click", handleFilterButtonClick);
@@ -34,12 +28,20 @@ function handleFilterButtonClick() {
     
   d3.event.preventDefault();
 
-  // format the user search criteria
-  var filterDate = dateInput.value;
-  var filterState = stateInput.value.toLowerCase();
-  var filterCity = cityInput.value.toLowerCase();
-  var filterCountry = countryInput.value.toLowerCase();
-  var filterShape = shapeInput.value.toLowerCase();
+// // tbody, inputs and button
+var dateInput = d3.select("#datetime");
+var stateInput = d3.select("#state");
+var cityInput = d3.select("#city");
+var countryInput = d3.select("#country");
+var shapeInput = d3.select("#shape");
+
+
+// format the user search criteria
+var filterDate = dateInput.value;
+var filterState = stateInput.value.trim().toLowerCase();
+var filterCity = cityInput.value.trim().toLowerCase();
+var filterCountry = countryInput.value.trim().toLowerCase();
+var filterShape = shapeInput.value.trim().toLowerCase();
 
   // filters
 
