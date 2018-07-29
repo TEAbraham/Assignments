@@ -2,33 +2,33 @@
 var tableData = data;
 
 // // tbody, inputs and button
-var $tbody = document.querySelector("tbody");
-var $dateInput = document.querySelector("#datetime");
-var $stateInput = document.querySelector("#state");
-var $cityInput = document.querySelector("#city");
-var $countryInput = document.querySelector("#country");
-var $shapeInput = document.querySelector("#shape");
-var $filterBtn = document.querySelector("#filter-btn");
+var tbody = d3.select("tbody");
+var dateInput = d3.select("#datetime");
+var stateInput = d3.select("#state");
+var cityInput = d3.select("#city");
+var countryInput = d3.select("#country");
+var shapeInput = d3.select("#shape");
+var filterBtn = d3.select("#filter-btn");
 
 
 // event listener for searchButton
-$filterBtn.addEventListener("click", handleFilterButtonClick);
+filterBtn.on("click", handleFilterButtonClick);
 
 // renderTable
 function renderTable() {
-  $tbody.innerHTML = "";
+  tbody.html= "";
   for (var i = 0; i < tableData.length; i++) {
     
     var address = tableData[i];
     console.log(address)
     var fields = Object.keys(address);
     
-    var $row = $tbody.insertRow(i);
+    var row = tbody.append('tr');
     for (var j = 0; j < fields.length; j++) {
       
       var field = fields[j];
-      var $cell = $row.insertCell(j);
-      $cell.innerText = address[field];
+      var cell = tbody.append('td');
+      cell.text = address[field];
     }
   }
 }
@@ -38,11 +38,11 @@ renderTable();
 
 function handleFilterButtonClick() {
   // format the user search criteria
-  var filterDate = $dateInput.value;
-  var filterState = $stateInput.value.trim().toLowerCase();
-  var filterCity = $cityInput.value.trim().toLowerCase();
-  var filterCountry = $countryInput.value.trim().toLowerCase();
-  var filterShape = $shapeInput.value.trim().toLowerCase();
+  var filterDate = dateInput.value;
+  var filterState = stateInput.value.trim().toLowerCase();
+  var filterCity = cityInput.value.trim().toLowerCase();
+  var filterCountry = countryInput.value.trim().toLowerCase();
+  var filterShape = shapeInput.value.trim().toLowerCase();
 
   // filters
   switch (true){
