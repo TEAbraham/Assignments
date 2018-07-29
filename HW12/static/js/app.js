@@ -14,14 +14,12 @@ var $shapeInput = document.querySelector("#shape");
 // event listener for searchButton
 $searchBtn.addEventListener("click", handleSearchButtonClick);
 
-var filteredTable = dataSet;
-
 // renderTable
 function renderTable() {
   $tbody.innerHTML = "";
-  for (var i = 0; i < filteredTable.length; i++) {
+  for (var i = 0; i < tableData.length; i++) {
     // Get get the current address object and its fields
-    var address = filteredTable[i];
+    var address = tableData[i];
     console.log(address)
     var fields = Object.keys(address);
     // Create a new row in the tbody, set the index to be i + startingIndex
@@ -46,56 +44,56 @@ function handleSearchButtonClick() {
   // filters
   if (filterDate != "")
   {
-    filteredTable = dataSet.filter(function(address) 
+    tableData = dataSet.filter(function(address) 
     {
       var addressDate = address.datetime; 
     
     return addressDate === filterDate;
     });
   }
-  else {filteredTable};
+  else {tableData};
   
 
   if(filterState != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    tableData = tableData.filter(function(address)
     {
       var addressState = address.state;
       return addressState === filterState;
     });
   }
-  else{filteredTable};
+  else{tableData};
 
   if(filterCity != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    tableData = tableData.filter(function(address)
     {
       var addressCity = address.city;
       return addressCity === filterCity;
     });
   }
 
-  else{filteredTable};
+  else{tableData};
 
   if(filterCountry != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    tableData = tableData.filter(function(address)
     {
       var addressCountry = address.country;
       return addressCountry === filterCountry;
     });
   }
-  else{filteredTable};
+  else{tableData};
 
   if(filterShape != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    tableData = tableData.filter(function(address)
     {
       var addressShape = address.shape;
       return addressShape === filterShape;
     });
   }
-  else{filteredTable};
+  else{tableData};
 
 renderTable();
 
