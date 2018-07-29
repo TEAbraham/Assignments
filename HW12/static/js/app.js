@@ -104,29 +104,13 @@ function handleFilterButtonClick() {
 
 
 
-var table = $('#ufo-table').DataTable();
- 
-table.columns().flatten().each( function ( colIdx ) {
-    // Create the select list and search operation
-    var select = $('<select />')
-        .appendTo(
-            table.column(colIdx).footer()
-        )
-        .on( 'change', function () {
-            table
-                .column( colIdx )
-                .search( $(this).val() )
-                .draw();
-        } );
- 
-    // Get the search data for the first column and add to the select list
-    table
-        .column( colIdx )
-        .cache( 'search' )
-        .sort()
-        .unique()
-        .each( function ( d ) {
-            select.append( $('<option value="'+d+'">'+d+'</option>') );
-        } );
-} );
+$(document).ready(function ()
+{
+  var r = $('#ufo-table tfoot tr');
+  r.find('th').each(function(){
+    $(this).css('padding', 8);
+  });
+  $('#ufo-table thead').append(r);
+  $('#search_0').css('text-align', 'center');
+});
 
