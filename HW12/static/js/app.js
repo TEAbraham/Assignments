@@ -5,10 +5,10 @@ var tableData = data;
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#datetime");
 var $stateInput = document.querySelector("#state");
-var $filterBtn = document.querySelector("#filter-btn");
 var $cityInput = document.querySelector("#city");
 var $countryInput = document.querySelector("#country");
 var $shapeInput = document.querySelector("#shape");
+var $filterBtn = document.querySelector("#filter-btn");
 
 
 // event listener for searchButton
@@ -105,5 +105,5 @@ renderTable();
 // pages
 
 $(document).ready(function() {
-  $('#table').DataTable();
+  $('#ufo-table').DataTable();
 });
