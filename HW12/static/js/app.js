@@ -90,7 +90,7 @@
 
 // Get references to the tbody element, input field and button
 var $tbody = d3.select("tbody");
-var $filterBtn = d3.select("#filter-btn");
+var $filterBtn = document.querySelector("#filter-btn");
 var $dateInput = document.querySelector("#datetime");
 var $stateInput = document.querySelector("#state");
 var $cityInput = document.querySelector("#city");
