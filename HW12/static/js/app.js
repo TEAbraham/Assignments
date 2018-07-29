@@ -104,8 +104,26 @@ function handleFilterButtonClick() {
 
 
 
-// $(document).ready(function() {
-//     $('#ufo-table').DataTable( {
-//         "pagingType": "full_numbers"
-//     } );
-// } );
+$(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#ufo-table tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Filter '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#ufo-table').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+} );
