@@ -38,11 +38,15 @@ var shapeInput = d3.select("#shape");
 
 // format the user search criteria
 var filterDate = dateInput.value;
-var filterState = stateInput.value.trim().toLowerCase();
-var filterCity = cityInput.value.trim().toLowerCase();
-var filterCountry = countryInput.value.trim().toLowerCase();
-var filterShape = shapeInput.value.trim().toLowerCase();
+var filterState = stateInput.value;
+var filterCity = cityInput.value;
+var filterCountry = countryInput.value;
+var filterShape = shapeInput.value;
 
+filterState = filterState.trim().toLowerCase()
+filterCity = filterCity.trim().toLowerCase()
+filterCountry = filterCountry.trim().toLowerCase()
+filterShape = filterShape.trim().toLowerCase()
   // filters
 
     if (filterDate != ""){
