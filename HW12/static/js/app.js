@@ -43,7 +43,7 @@ function handleFilterButtonClick() {
 
     // filters
 
-    if (filterDate.length != 0){
+    if (filterDate != ""){
         tableData = data.filter(function(address){
             var addressDate = address.datetime; 
             return addressDate === filterDate;
@@ -51,7 +51,7 @@ function handleFilterButtonClick() {
         }
     else {tableData=data};
 
-    if (filterDate.length != 0){
+    if (filterDate != ""){
         tableData = data.filter(function(address){
             var addressState = address.state; 
             return addressState === filterState;
@@ -59,7 +59,7 @@ function handleFilterButtonClick() {
         }
     else {tableData=tableData};
 
-    if (filterDate.length != 0){
+    if (filterDate != ""){
         tableData = data.filter(function(address){
             var addressCity = address.city; 
             return addressCity === filterCity;
@@ -68,7 +68,7 @@ function handleFilterButtonClick() {
         
     else {tableData=tableData};
 
-    if (filterDate.length != 0){
+    if (filterDate != ""){
         tableData = data.filter(function(address){
             var addressCountry = address.country; 
             return addressCountry === filterCountry;
@@ -76,7 +76,7 @@ function handleFilterButtonClick() {
         }
     else {tableData=tableData};
 
-    if (filterDate.length != 0){
+    if (filterDate != ""){
         tableData = data.filter(function(address){
             var addressShape = address.shape; 
             return addressShape === filterShape;
