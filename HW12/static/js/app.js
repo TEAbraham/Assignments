@@ -15,7 +15,7 @@ var filterBtn = d3.select("#filter-btn");
 filterBtn.on("click", handleFilterButtonClick);
 
 // renderTable
-function renderTable() {
+function renderTable(tableData) {
     tableData.forEach(function(ufo) {
         console.log(ufo);
         var row = tbody.append("tr");
@@ -43,50 +43,44 @@ function handleFilterButtonClick() {
 
   // filters
 
-    if (filterDate != "")
-    {
-    tableData = data.filter(function(address) 
-    {
-        var addressDate = address.datetime; 
-        return addressDate === filterDate;
-    });
-    }
-    else {tableData};
-    if (filterState != "")
-    {
-    tableData = tableData.filter(function(address)
-    {
-        var addressState = address.state;
-        return addressState === filterState;
-    });
-    }
-    else {tableData};
-    if (filterCity != "")
-    {
-    tableData = tableData.filter(function(address)
-    {
-        var addressCity = address.city;
-        return addressCity === filterCity;
-    });
-    }
-    else {tableData};
-    if (filterCountry != "")
-    {
-    tableData = tableData.filter(function(address)
-    {
-        var addressCountry = address.country;
-        return addressCountry === filterCountry;
-    });
-    }
-    else {tableData};
-    if (filterShape != "")
-    {
-    tableData = tableData.filter(function(address)
-    {
-        var addressShape = address.shape;
-        return addressShape === filterShape;
-    });
-    }
-    else {tableData};
+    if (filterDate != ""){
+        x = data.filter(function(address){
+            var addressDate = address.datetime; 
+            return addressDate === filterDate;
+            });
+        renderTable(x)}
+    else {renderTable(tableData)};
+
+    if (filterDate != ""){
+        x = data.filter(function(address){
+            var addressState = address.state; 
+            return addressState === filterState;
+            });
+        renderTable(x)}
+    else {renderTable(tableData)};
+
+    if (filterDate != ""){
+        x = data.filter(function(address){
+            var addressCity = address.city; 
+            return addressCity === filterCity;
+            });
+        renderTable(x)}
+    else {renderTable(tableData)};
+
+    if (filterDate != ""){
+        x = data.filter(function(address){
+            var addressCountry = address.country; 
+            return addressCountry === filterCountry;
+            });
+        renderTable(x)}
+    else {renderTable(tableData)};
+
+    if (filterDate != ""){
+        x = data.filter(function(address){
+            var addressShape = address.shape; 
+            return addressShape === filterShape;
+            });
+        renderTable(x)}
+    else {renderTable(tableData)};
 }
 
