@@ -28,19 +28,19 @@ function handleFilterButtonClick() {
     d3.event.target.value.trim().toLowerCase();
 
     // // tbody, inputs and button
-    var dateInput = d3.select("#datetime");
-    var stateInput = d3.select("#state");
-    var cityInput = d3.select("#city");
-    var countryInput = d3.select("#country");
-    var shapeInput = d3.select("#shape");
+    var dateInput = document.getElementById("#datetime");
+    var stateInput = document.getElementById("#state");
+    var cityInput = document.getElementById("#city");
+    var countryInput = document.getElementById("#country");
+    var shapeInput = document.getElementById("#shape");
 
 
     // format the user search criteria
-    var filterDate = dateInput.node().value;
-    var filterState = stateInput.node().value;
-    var filterCity = cityInput.node().value;
-    var filterCountry = countryInput.node().value;
-    var filterShape = shapeInput.node().value;
+    var filterDate = dateInput.value;
+    var filterState = stateInput.value;
+    var filterCity = cityInput.value;
+    var filterCountry = countryInput.value;
+    var filterShape = shapeInput.value;
 
     // filters
 
