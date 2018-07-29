@@ -126,9 +126,6 @@ function renderTable() {
 function handleFilterButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
 
-  console.log("Filtered Return")
-  d3.event.preventDefault();
-
   var filterDate = $dateInput.value;
   var filterState = $stateInput.value.trim().toLowerCase();
   var filterCity = $cityInput.value.trim().toLowerCase();
