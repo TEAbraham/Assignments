@@ -5,9 +5,6 @@ var tableData = data;
 var tbody = d3.select("tbody");
 var filterBtn = d3.select("#filter-btn");
 
-// event listener for searchButton
-filterBtn.addEventListener("click", handleFilterButtonClick);
-
 // renderTable
 function renderTable() {
     tableData.forEach(function(ufo){
@@ -91,3 +88,5 @@ filterShape = filterShape.trim().toLowerCase()
     else {tableData=tableData};
   renderTable();
 }
+
+filterBtn.on("click", handleFilterButtonClick);
