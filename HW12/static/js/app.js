@@ -3,16 +3,16 @@ var tableData = data;
 
 // // tbody, inputs and button
 var $tbody = document.querySelector("tbody");
-// var $dateInput = document.querySelector("#datetime");
-// var $stateInput = document.querySelector("#state");
-// var $cityInput = document.querySelector("#city");
-// var $countryInput = document.querySelector("#country");
-// var $shapeInput = document.querySelector("#shape");
-// var $filterBtn = document.querySelector("#filter-btn");
+var $dateInput = document.querySelector("#datetime");
+var $stateInput = document.querySelector("#state");
+var $cityInput = document.querySelector("#city");
+var $countryInput = document.querySelector("#country");
+var $shapeInput = document.querySelector("#shape");
+var $filterBtn = document.querySelector("#filter-btn");
 
 
 // event listener for searchButton
-// $filterBtn.addEventListener("click", handleFilterButtonClick);
+$filterBtn.addEventListener("click", handleFilterButtonClick);
 
 // renderTable
 function renderTable() {
@@ -34,72 +34,72 @@ function renderTable() {
 }
 
 // render initial table
-// renderTable();
+renderTable();
 
-// function handleFilterButtonClick() {
-//   // format the user search criteria
-//   var filterDate = $dateInput.value;
-//   var filterState = $stateInput.value.trim().toLowerCase();
-//   var filterCity = $cityInput.value.trim().toLowerCase();
-//   var filterCountry = $countryInput.value.trim().toLowerCase();
-//   var filterShape = $shapeInput.value.trim().toLowerCase();
+function handleFilterButtonClick() {
+  // format the user search criteria
+  var filterDate = $dateInput.value;
+  var filterState = $stateInput.value.trim().toLowerCase();
+  var filterCity = $cityInput.value.trim().toLowerCase();
+  var filterCountry = $countryInput.value.trim().toLowerCase();
+  var filterShape = $shapeInput.value.trim().toLowerCase();
 
-//   // filters
-//   switch (true){
-//   case condition1:
-//     if (filterDate != "")
-//     {
-//     tableData = data.filter(function(address) 
-//     {
-//         var addressDate = address.datetime; 
-//         return addressDate === filterDate;
-//     });
-//     }
-//     break;
-//   case condition2:
-//     if (filterState != "")
-//     {
-//     tableData = tableData.filter(function(address)
-//     {
-//         var addressState = address.state;
-//         return addressState === filterState;
-//     });
-//     }
-//     break;
-//   case conditon3:
-//     if (filterCity != "")
-//     {
-//     tableData = tableData.filter(function(address)
-//     {
-//         var addressCity = address.city;
-//         return addressCity === filterCity;
-//     });
-//     }
-//     break;
-//   case condition4:
-//     if (filterCountry != "")
-//     {
-//     tableData = tableData.filter(function(address)
-//     {
-//         var addressCountry = address.country;
-//         return addressCountry === filterCountry;
-//     });
-//     }
-//     break;
-//   case condition5:
-//     if (filterShape != "")
-//     {
-//     tableData = tableData.filter(function(address)
-//     {
-//         var addressShape = address.shape;
-//         return addressShape === filterShape;
-//     });
-//     }
-//     break;
-//   default:
-//     {tableData=tableData};
-//     }
-// }
+  // filters
+  switch (true){
+  case condition1:
+    if (filterDate != "")
+    {
+    tableData = data.filter(function(address) 
+    {
+        var addressDate = address.datetime; 
+        return addressDate === filterDate;
+    });
+    }
+    break;
+  case condition2:
+    if (filterState != "")
+    {
+    tableData = tableData.filter(function(address)
+    {
+        var addressState = address.state;
+        return addressState === filterState;
+    });
+    }
+    break;
+  case conditon3:
+    if (filterCity != "")
+    {
+    tableData = tableData.filter(function(address)
+    {
+        var addressCity = address.city;
+        return addressCity === filterCity;
+    });
+    }
+    break;
+  case condition4:
+    if (filterCountry != "")
+    {
+    tableData = tableData.filter(function(address)
+    {
+        var addressCountry = address.country;
+        return addressCountry === filterCountry;
+    });
+    }
+    break;
+  case condition5:
+    if (filterShape != "")
+    {
+    tableData = tableData.filter(function(address)
+    {
+        var addressShape = address.shape;
+        return addressShape === filterShape;
+    });
+    }
+    break;
+  default:
+    {tableData=tableData};
+    }
+}
 
 
 
