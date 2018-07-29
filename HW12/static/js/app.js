@@ -22,6 +22,7 @@ function renderTable() {
     var fields = Object.keys(address);
     var $row = $tbody.insertRow(i);
     for (var j = 0; j < fields.length; j++) {
+      var field = fields[j]
       var $cell = $row.insertCell(j);
       $cell.innerText = address[field];
     }
