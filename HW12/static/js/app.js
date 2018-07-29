@@ -44,43 +44,44 @@ function handleFilterButtonClick() {
   // filters
 
     if (filterDate != ""){
-        x = data.filter(function(address){
+        tableData = data.filter(function(address){
             var addressDate = address.datetime; 
             return addressDate === filterDate;
             });
-        renderTable(x)}
-    else {renderTable(tableData)};
+        }
+    else {tableData=data};
 
     if (filterDate != ""){
-        x = data.filter(function(address){
+        tableData = data.filter(function(address){
             var addressState = address.state; 
             return addressState === filterState;
             });
-        renderTable(x)}
-    else {renderTable(tableData)};
+        }
+    else {tableData=data};
 
     if (filterDate != ""){
-        x = data.filter(function(address){
+        tableData = data.filter(function(address){
             var addressCity = address.city; 
             return addressCity === filterCity;
             });
-        renderTable(x)}
-    else {renderTable(tableData)};
+        } 
+        
+    else {tableData=data};
 
     if (filterDate != ""){
-        x = data.filter(function(address){
+        tableData = data.filter(function(address){
             var addressCountry = address.country; 
             return addressCountry === filterCountry;
             });
-        renderTable(x)}
-    else {renderTable(tableData)};
+        }
+    else {tableData=data};
 
     if (filterDate != ""){
-        x = data.filter(function(address){
+        tableData = data.filter(function(address){
             var addressShape = address.shape; 
             return addressShape === filterShape;
             });
-        renderTable(x)}
-    else {renderTable(tableData)};
+        }
+    else {tableData=tableData};
+  renderTable();
 }
-
