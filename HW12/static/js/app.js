@@ -99,14 +99,15 @@ var $shapeInput = document.querySelector("#shape");
 
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
-$filterBtn.addEventListener("click", handleFilterButtonClick);
+$filterBtn.addEventListener("click", handleFilterButtonClick, function(event){
+    event.preventDefault()
+});
 
 // Set filteredAddresses to dataSet initially
 var filteredTable = data;
 
 // renderTable renders the filteredAddresses to the tbody
 function renderTable() {
-  d3.event.preventDefault();
   $tbody.innerHTML = "";
   for (var i = 0; i < filteredTable.length; i++) {
     // Get get the current address object and its fields
