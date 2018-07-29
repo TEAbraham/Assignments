@@ -187,7 +187,7 @@ function handleFilterButtonClick() {
   }
   else{filteredTable};
 
-renderTable();
+// renderTable();
 
 }
 
