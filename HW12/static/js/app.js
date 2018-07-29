@@ -50,7 +50,7 @@ function handleFilterButtonClick() {
             return addressDate === filterDate;
             });
         }
-    // else {tableData=data};
+    
 
     if (filterDate != ""){
         tableData = data.filter(function(address){
@@ -58,7 +58,7 @@ function handleFilterButtonClick() {
             return addressState === filterState;
             });
         }
-    // else {tableData=tableData};
+    
 
     if (filterDate != ""){
         tableData = data.filter(function(address){
@@ -67,7 +67,7 @@ function handleFilterButtonClick() {
             });
         } 
         
-    // else {tableData=tableData};
+    
 
     if (filterDate != ""){
         tableData = data.filter(function(address){
@@ -75,16 +75,15 @@ function handleFilterButtonClick() {
             return addressCountry === filterCountry;
             });
         }
-    // else {tableData=tableData};
+    
 
     if (filterDate != ""){
         tableData = data.filter(function(address){
             var addressShape = address.shape; 
             return addressShape === filterShape;
             });
-        }
-    // else {tableData=tableData};
-    renderTable();
+        renderTable();}
+    
 }
 
 filterBtn.on("click", handleFilterButtonClick);
