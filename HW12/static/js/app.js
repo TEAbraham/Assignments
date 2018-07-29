@@ -89,10 +89,10 @@
 // filterBtn.on("click", handleFilterButtonClick);
 
 // Get references to the tbody element, input field and button
-var $tbody = document.querySelector("tbody");
+var $tbody = d3.select("tbody");
+var $filterBtn = d3.select("#filter-btn");
 var $dateInput = document.querySelector("#datetime");
 var $stateInput = document.querySelector("#state");
-var $filterBtn = document.querySelector("#filter-btn");
 var $cityInput = document.querySelector("#city");
 var $countryInput = document.querySelector("#country");
 var $shapeInput = document.querySelector("#shape");
