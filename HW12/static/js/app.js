@@ -59,7 +59,7 @@ var filterShape = shapeInput.value.trim().toLowerCase();
             return addressState === filterState;
             });
         }
-    else {tableData=data};
+    else {tableData=tableData};
 
     if (filterDate != ""){
         tableData = data.filter(function(address){
@@ -68,7 +68,7 @@ var filterShape = shapeInput.value.trim().toLowerCase();
             });
         } 
         
-    else {tableData=data};
+    else {tableData=tableData};
 
     if (filterDate != ""){
         tableData = data.filter(function(address){
@@ -76,7 +76,7 @@ var filterShape = shapeInput.value.trim().toLowerCase();
             return addressCountry === filterCountry;
             });
         }
-    else {tableData=data};
+    else {tableData=tableData};
 
     if (filterDate != ""){
         tableData = data.filter(function(address){
