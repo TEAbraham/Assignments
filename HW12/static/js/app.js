@@ -123,6 +123,9 @@ function renderTable() {
   }
 }
 
+// Render the table for the first time on page load
+renderTable();
+
 function handleFilterButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
 
@@ -190,9 +193,6 @@ function handleFilterButtonClick() {
 renderTable();
 
 }
-
-// Render the table for the first time on page load
-renderTable();
 
 //Add pagination to the table to show 10 -100 entries per page
 
