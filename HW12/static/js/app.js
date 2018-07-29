@@ -100,8 +100,7 @@ function handleFilterButtonClick() {
 // render initial table
 renderTable();
 
-// pages
 
-$(document).ready(function() {
-  $('#ufo-table').DataTable();
-});
+// $(document).ready(function() {
+//   $('#ufo-table').DataTable();
+// });
