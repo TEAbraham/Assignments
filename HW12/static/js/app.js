@@ -123,7 +123,7 @@ function renderTable() {
   }
 }
 
-function handleSearchFilterClick() {
+function handleFilterButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
   var filterDate = $dateInput.value;
   var filterState = $stateInput.value.trim().toLowerCase();
