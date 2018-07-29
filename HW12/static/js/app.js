@@ -101,6 +101,6 @@ function handleFilterButtonClick() {
 renderTable();
 
 
-// $(document).ready(function() {
-//   $('#ufo-table').DataTable();
-// });
+document.ready(function() {
+  ('#ufo-table').DataTable();
+});
