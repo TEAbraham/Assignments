@@ -51,10 +51,7 @@ function handleFilterButtonClick() {
     return addressDate === filterDate;
     });
   }
-  else {tableData};
-  
-
-  if(filterState != "")
+  else if(filterState != "")
   {
     tableData = tableData.filter(function(address)
     {
@@ -62,9 +59,7 @@ function handleFilterButtonClick() {
       return addressState === filterState;
     });
   }
-  else{tableData};
-
-  if(filterCity != "")
+  else if(filterCity != "")
   {
     tableData = tableData.filter(function(address)
     {
@@ -73,9 +68,7 @@ function handleFilterButtonClick() {
     });
   }
 
-  else{tableData};
-
-  if(filterCountry != "")
+  else if(filterCountry != "")
   {
     tableData = tableData.filter(function(address)
     {
@@ -83,9 +76,7 @@ function handleFilterButtonClick() {
       return addressCountry === filterCountry;
     });
   }
-  else{tableData};
-
-  if(filterShape != "")
+  else if(filterShape != "")
   {
     tableData = tableData.filter(function(address)
     {
