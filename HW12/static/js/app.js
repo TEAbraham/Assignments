@@ -33,6 +33,9 @@ function renderTable() {
   }
 }
 
+// render initial table
+renderTable();
+
 function handleFilterButtonClick() {
   // format the user search criteria
   var filterDate = $dateInput.value;
@@ -88,8 +91,7 @@ function handleFilterButtonClick() {
 
 }
 
-// render initial table
-renderTable();
+
 
 
 document.ready(function() {
