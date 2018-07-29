@@ -104,26 +104,29 @@ function handleFilterButtonClick() {
 
 
 
-$(document).ready(function() {
-    // Setup - add a text input to each footer cell
-    $('#ufo-table tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Filter '+title+'" />' );
-    } );
+var table = $('#ufo-table').DataTable();
  
-    // DataTable
-    var table = $('#ufo-table').DataTable();
- 
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
- 
-        $( 'input', this.footer() ).on( 'keyup change', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
+table.columns().flatten().each( function ( colIdx ) {
+    // Create the select list and search operation
+    var select = $('<select />')
+        .appendTo(
+            table.column(colIdx).footer()
+        )
+        .on( 'change', function () {
+            table
+                .column( colIdx )
+                .search( $(this).val() )
+                .draw();
         } );
-    } );
+ 
+    // Get the search data for the first column and add to the select list
+    table
+        .column( colIdx )
+        .cache( 'search' )
+        .sort()
+        .unique()
+        .each( function ( d ) {
+            select.append( $('<option value="'+d+'">'+d+'</option>') );
+        } );
 } );
+
