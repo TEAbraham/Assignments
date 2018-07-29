@@ -5,14 +5,14 @@ var tableData = data;
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#datetime");
 var $stateInput = document.querySelector("#state");
-var $searchBtn = document.querySelector("#search");
+var $filterBtn = document.querySelector("#filter-btn");
 var $cityInput = document.querySelector("#city");
 var $countryInput = document.querySelector("#country");
 var $shapeInput = document.querySelector("#shape");
 
 
 // event listener for searchButton
-$searchBtn.addEventListener("click", handleSearchButtonClick);
+$filterBtn.addEventListener("click", handleFilterButtonClick);
 
 // renderTable
 function renderTable() {
@@ -33,7 +33,7 @@ function renderTable() {
   }
 }
 
-function handleSearchButtonClick() {
+function handleFilterButtonClick() {
   // format the user search criteria
   var filterDate = $dateInput.value;
   var filterState = $stateInput.value.trim().toLowerCase();
@@ -44,7 +44,7 @@ function handleSearchButtonClick() {
   // filters
   if (filterDate != "")
   {
-    tableData = dataSet.filter(function(address) 
+    tableData = data.filter(function(address) 
     {
       var addressDate = address.datetime; 
     
