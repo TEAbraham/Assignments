@@ -16,22 +16,16 @@ filterBtn.on("click", handleFilterButtonClick);
 
 // renderTable
 function renderTable() {
-  tbody.html= "";
-  for (var i = 0; i < tableData.length; i++) {
-    
-    var address = tableData[i];
-    console.log(address)
-    var fields = Object.keys(address);
-    
-    var row = tbody.append('tr');
-    for (var j = 0; j < fields.length; j++) {
-      
-      var field = fields[j];
-      var cell = tbody.append('td');
-      cell.text = address[field];
-    }
+    tableData.forEach(function(ufo) {
+        console.log(ufo);
+        var row = tbody.append("tr");
+        Object.entries(ufo).forEach(function([key, value]) {
+          console.log(key, value);
+          var cell = tbody.append("td");
+          cell.text(value);
+        });
+      });
   }
-}
 
 // render initial table
 renderTable();
