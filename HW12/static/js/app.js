@@ -101,16 +101,3 @@ function handleFilterButtonClick() {
     }
 }
 
-
-
-
-$(document).ready(function ()
-{
-  var r = $('#ufo-table tfoot tr');
-  r.find('th').each(function(){
-    $(this).css('padding', 8);
-  });
-  $('#ufo-table thead').append(r);
-  $('#search_0').css('text-align', 'center');
-});
-
