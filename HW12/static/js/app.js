@@ -23,28 +23,25 @@ renderTable();
 
 function handleFilterButtonClick() {
     
-  d3.event.preventDefault();
+    d3.event.preventDefault();
+    d3.event.target.value.trim().toLowerCase();
 
-// // tbody, inputs and button
-var dateInput = d3.select("#datetime");
-var stateInput = d3.select("#state");
-var cityInput = d3.select("#city");
-var countryInput = d3.select("#country");
-var shapeInput = d3.select("#shape");
+    // // tbody, inputs and button
+    var dateInput = d3.select("#datetime");
+    var stateInput = d3.select("#state");
+    var cityInput = d3.select("#city");
+    var countryInput = d3.select("#country");
+    var shapeInput = d3.select("#shape");
 
 
-// format the user search criteria
-var filterDate = dateInput.value;
-var filterState = stateInput.value;
-var filterCity = cityInput.value;
-var filterCountry = countryInput.value;
-var filterShape = shapeInput.value;
+    // format the user search criteria
+    var filterDate = dateInput.value;
+    var filterState = stateInput.value;
+    var filterCity = cityInput.value;
+    var filterCountry = countryInput.value;
+    var filterShape = shapeInput.value;
 
-filterState = filterState.trim().toLowerCase()
-filterCity = filterCity.trim().toLowerCase()
-filterCountry = filterCountry.trim().toLowerCase()
-filterShape = filterShape.trim().toLowerCase()
-  // filters
+    // filters
 
     if (filterDate.length != 0){
         tableData = data.filter(function(address){
@@ -86,7 +83,7 @@ filterShape = filterShape.trim().toLowerCase()
             });
         }
     else {tableData=tableData};
-  renderTable();
+    renderTable();
 }
 
 filterBtn.on("click", handleFilterButtonClick);
