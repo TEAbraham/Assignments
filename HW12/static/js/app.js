@@ -34,7 +34,7 @@ function renderTable() {
 }
 
 // render initial table
-renderTable();
+// renderTable();
 
 // function handleFilterButtonClick() {
 //   // format the user search criteria
