@@ -126,11 +126,11 @@ var filteredTable = data;
 function renderTable() {
     filteredTable.forEach(function(ufo){
         console.log(ufo);
-        var $row = $tbody.append("tr");
+        var row = $tbody.append("tr");
         Object.entries(ufo).forEach(function([key, value]) {
           console.log(key, value);
-          var $cell = $tbody.append("td");
-          $cell.text(value);
+          var cell = $tbody.append("td");
+          cell.text(value);
         });
       });
   }
