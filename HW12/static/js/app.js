@@ -45,55 +45,65 @@ function handleFilterButtonClick() {
   var filterShape = $shapeInput.value.trim().toLowerCase();
 
   // filters
-  if (filterDate != "")
-  {
+  switch (true){
+  case condition1:
+    (filterDate != "")
+    {
     tableData = data.filter(function(address) 
     {
-      var addressDate = address.datetime; 
-    
-    return addressDate === filterDate;
+        var addressDate = address.datetime; 
+        return addressDate === filterDate;
     });
-  }
-  else if(filterState != "")
-  {
+    }
+    break;
+  case condition2:
+    (filterState != "")
+    {
     tableData = tableData.filter(function(address)
     {
-      var addressState = address.state;
-      return addressState === filterState;
+        var addressState = address.state;
+        return addressState === filterState;
     });
-  }
-  else if(filterCity != "")
-  {
+    }
+    break;
+  case conditon3:
+    (filterCity != "")
+    {
     tableData = tableData.filter(function(address)
     {
-      var addressCity = address.city;
-      return addressCity === filterCity;
+        var addressCity = address.city;
+        return addressCity === filterCity;
     });
-  }
-
-  else if(filterCountry != "")
-  {
+    }
+    break;
+  case condition4:
+    (filterCountry != "")
+    {
     tableData = tableData.filter(function(address)
     {
-      var addressCountry = address.country;
-      return addressCountry === filterCountry;
+        var addressCountry = address.country;
+        return addressCountry === filterCountry;
     });
-  }
-  else if(filterShape != "")
-  {
+    }
+    break;
+  case condition5:
+    (filterShape != "")
+    {
     tableData = tableData.filter(function(address)
     {
-      var addressShape = address.shape;
-      return addressShape === filterShape;
+        var addressShape = address.shape;
+        return addressShape === filterShape;
     });
-  }
-  else{tableData};
-
+    }
+    break;
+  default:
+    {tableData};
+    }
 }
 
 
 
 
 document.ready(function() {
-  ('#ufo-table').DataTable();
+  $('#ufo-table').DataTable();
 });
