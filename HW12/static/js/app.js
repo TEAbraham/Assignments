@@ -95,8 +95,6 @@ function handleFilterButtonClick() {
   }
   else{tableData};
 
-renderTable();
-
 }
 
 // render initial table
