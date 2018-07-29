@@ -6,7 +6,7 @@ var tbody = d3.select("tbody");
 var filterBtn = d3.select("#filter-btn");
 
 // event listener for searchButton
-filterBtn.on("click", handleFilterButtonClick);
+filterBtn.addEventListener("click", handleFilterButtonClick);
 
 // renderTable
 function renderTable() {
