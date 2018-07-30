@@ -84,9 +84,8 @@ select {
   min-width: 70px;
 }
 
-table.dataTable thead,
-table.dataTable tfoot {
-  color: white;
+table.dataTable.order-column.stripe tbody tr.even{
+  color: black;
 }
 
 .loader {
