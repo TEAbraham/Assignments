@@ -8,7 +8,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  color: #d17000 !important;
+  color: #ee7f00 !important;
 }
 
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
@@ -36,12 +36,13 @@ body {
   bottom: 0;
   left: 0;
   padding: 5px;
-  background: #1b3146;
+  background: #000000;
 }
 
 .navbar {
   padding: 5px;
   margin: 0;
+  background: #000000;
 }
 
 /* This CSS styles the ufo icon in the navbar */
@@ -143,7 +144,6 @@ select {
 @media (max-width: 800px) {
   #table-area td {
     font-size: 1em;
-    color: #d17000;
   }
 }
 
