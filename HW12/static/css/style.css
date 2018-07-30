@@ -85,7 +85,7 @@ select {
 }
 
 table.dataTable.order-column.stripe tbody tr.even{
-  color: black !important;
+  background-color: black !important;
 }
 
 .loader {
