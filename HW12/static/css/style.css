@@ -9,7 +9,7 @@ body {
   padding: 0;
   margin: 0;
   color: #02c01b !important;
-  background-color: white !important;
+  background-color: black !important;
 }
 
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
@@ -168,7 +168,7 @@ select {
     height: 1px;
     margin-top: 20px;
     content: " ";
-    background: aliceblue;
+    background: black;
   }
 
   #table-area td {
