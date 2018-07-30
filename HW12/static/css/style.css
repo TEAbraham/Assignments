@@ -8,7 +8,6 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  color: #02c01b !important;
   background-color: black !important;
 }
 
@@ -105,7 +104,7 @@ select {
   padding: 20px;
   margin: 0;
   background: black;
-  background-image: url("../images/closeencounters.jpg");
+  background-image: url("../images/arrival.jpg");
   background-attachment: fixed;
   background-position: bottom center;
   background-size: cover;
