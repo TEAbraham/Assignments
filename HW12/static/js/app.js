@@ -17,14 +17,14 @@ var filteredTable = data;
 function renderTable() {
   $tbody.innerHTML = "";
   for (var i = 0; i < filteredTable.length; i++) {
-    var address = filteredTable[i];
-    console.log(address)
-    var fields = Object.keys(address);
+    var sighting = filteredTable[i];
+    console.log(sighting)
+    var fields = Object.keys(sighting);
     var $row = $tbody.insertRow(i);
     for (var j = 0; j < fields.length; j++) {
       var field = fields[j]
       var $cell = $row.insertCell(j);
-      $cell.innerText = address[field];
+      $cell.innerText = sighting[field];
     }
   }
 }
@@ -43,12 +43,12 @@ function handleFilterButtonClick() {
 
   if (filterDate != "")
   {
-    filteredTable = dataSet.filter(function(address) 
+    filteredTable = dataSet.filter(function(sighting) 
     {
-      var addressDate = address.datetime; 
+      var sightingDate = sighting.datetime; 
     
 
-    return addressDate === filterDate;
+    return sightingDate === filterDate;
     });
   }
   else {filteredTable};
@@ -56,20 +56,20 @@ function handleFilterButtonClick() {
 
   if(filterState != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    filteredTable = filteredTable.filter(function(sighting)
     {
-      var addressState = address.state;
-      return addressState === filterState;
+      var sightingState = sighting.state;
+      return sightingState === filterState;
     });
   }
   else{filteredTable};
 
   if(filterCity != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    filteredTable = filteredTable.filter(function(sighting)
     {
-      var addressCity = address.city;
-      return addressCity === filterCity;
+      var sightingCity = sighting.city;
+      return sightingCity === filterCity;
     });
   }
 
@@ -77,20 +77,20 @@ function handleFilterButtonClick() {
 
   if(filterCountry != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    filteredTable = filteredTable.filter(function(sighting)
     {
-      var addressCountry = address.country;
-      return addressCountry === filterCountry;
+      var sightingCountry = sighting.country;
+      return sightingCountry === filterCountry;
     });
   }
   else{filteredTable};
 
   if(filterShape != "")
   {
-    filteredTable = filteredTable.filter(function(address)
+    filteredTable = filteredTable.filter(function(sighting)
     {
-      var addressShape = address.shape;
-      return addressShape === filterShape;
+      var sightingShape = sighting.shape;
+      return sightingShape === filterShape;
     });
   }
   else{filteredTable};
