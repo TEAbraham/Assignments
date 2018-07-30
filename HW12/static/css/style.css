@@ -160,6 +160,7 @@ select {
 
   #table-area tr td:last-child {
     margin-bottom: 20px;
+    background: black;
   }
 
   #table-area tr td:last-child::after {
