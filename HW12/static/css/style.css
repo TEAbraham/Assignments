@@ -84,7 +84,7 @@ select {
   min-width: 70px;
 }
 
-table.dataTable.order-column.stripe tbody tr.even{
+table.dataTable.stripe tbody tr.even{
   background-color: black !important;
 }
 
