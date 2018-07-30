@@ -36,13 +36,12 @@ body {
   bottom: 0;
   left: 0;
   padding: 5px;
-  background: #000000;
+  background: #1b3146;
 }
 
 .navbar {
   padding: 5px;
   margin: 0;
-  background: #000000;
 }
 
 /* This CSS styles the ufo icon in the navbar */
