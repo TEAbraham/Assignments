@@ -84,6 +84,11 @@ select {
   min-width: 70px;
 }
 
+table.dataTable thead,
+table.dataTable tfoot {
+  color: white;
+}
+
 .loader {
   margin-top: 50px;
 }
