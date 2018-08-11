@@ -2,30 +2,29 @@
 var svgWidth = 960;
 var svgHeight = 500;
 
-// Define the chart's margins as an object
-var chartMargin = {
-  top: 30,
-  right: 30,
-  bottom: 30,
-  left: 30
+var margin = {
+  top: 20,
+  right: 40,
+  bottom: 80,
+  left: 100
 };
-// Define dimensions of the chart area
-var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
-var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
-var padding = 25;  // Padding around canvas, i.e. replaces the 0 of scale
+
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
+var padding = 25;
 var formatPercent = d3.format('.2%');
-// Select body, append SVG area to it, and set the dimensions
+
+// Create an SVG wrapper, append an SVG group that will hold our chart,
+// and shift the latter by left and top margins.
 var svg = d3
   .select(".chart")
-    .append("svg")
-    .attr("height", svgHeight)
-    .attr("width", svgWidth)
-  // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
-  .append("g")
-    .attr("transform", "translate(" + chartMargin.right + ", " + chartMargin.top + ")");
-// Append and SVG group
-var chart = svg.append("g");
-// Configure a band scale, with a range between 0 and the chartWidth and a padding of 0.1 (10%)
+  .append("svg")
+  .attr("width", svgWidth)
+  .attr("height", svgHeight);
+
+// Append an SVG group
+var chart = svg.append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 d3.select(".chart")
     .append("div")
@@ -33,7 +32,7 @@ d3.select(".chart")
     .style("opacity", 0);
 
 // Load data f
-d3.csv("/assets/data/data.csv", function(error, censusData) {
+d3.csv("assets/data/data.csv", function(error, censusData) {
   for (var i = 0; i < censusData.length; i++){
         
         console.log(censusData[i].abbr)
@@ -47,10 +46,10 @@ d3.csv("/assets/data/data.csv", function(error, censusData) {
   
   });
   // Scale the range of the data
-  var x = d3.scaleLinear().range([0, chartWidth]);
+  var x = d3.scaleLinear().range([0, width]);
 
-// Create a linear scale, with a range between the chartHeight and 0.
-  var y= d3.scaleLinear().range([chartHeight, 0]);
+// Create a linear scale, with a range between the height and 0.
+  var y= d3.scaleLinear().range([height, 0]);
 
   var xAxis = d3.axisBottom(x);
 
@@ -73,11 +72,11 @@ d3.csv("/assets/data/data.csv", function(error, censusData) {
  
   //xScale = x
       //.domain([d3.min(censusData, xValue)-1, d3.max(censusData, xValue)+1])
-       //.range([0,chartWidth]);
+       //.range([0,width]);
   
   //yScale = y
       //.domain([d3.min(censusData, yValue)-1, d3.max(censusData, yValue)+1])
-      //.range([chartHeight,0]);
+      //.range([height,0]);
 
   function findMinAndMax(i) {
         xMin = d3.min(censusData, function(d) {
@@ -106,10 +105,10 @@ d3.csv("/assets/data/data.csv", function(error, censusData) {
   var toolTip = d3.tip()
         .attr("class", "tooltip")
         .html(function(d) {
-            var state = d.abbr;
+            var state = d.state;
             var poverty = +d.poverty;
             var healthcare = +d.healthcare;
-            return (d.State + "<br> In Poverty: " + poverty + "%<br> Lack Healthcare: " + healthcare + "%");
+            return (state + "<br> Poverty: " + poverty + "%<br>Healthcare: " + healthcare + "%");
       });
 
   chart.call(toolTip);
@@ -117,45 +116,42 @@ d3.csv("/assets/data/data.csv", function(error, censusData) {
 
 
   // Circles
-  circles = chart.selectAll('circle')
-        .data(censusData)
+  var circles = chart.selectAll('circle')
+
+  circles.data(censusData)
         .enter().append('circle')
         .attr("class", "circle")
-        .attr("cx", function(d, index) {
+        .attr("cx", function(d) {
             return x(+d[currentAxisXLabel]);
         })
-        .attr("cy", function(d, index) {
+        .attr("cy", function(d) {
             return y(d.healthcare);
         })   
         .attr('r','10')
         .attr('stroke','black')
         .attr('stroke-width',1)
-        .style('fill', "lightblue")
-        .attr("class", "circleText")
-        // add listeners on text too since it is on top of circle
+        .style('fill', "green")
         .on("mouseover", function(d) {
           toolTip.show(d);
         })
-        // onmouseout event
-        .on("mouseout", function(d, index) {
+        .on("mouseout", function(d) {
           toolTip.hide(d);
         });              
      
   
     // Add Text Labels
-  circles.append('text')
-         .attr("x", function(d, index) {
-            return x(+d[currentAxisXLabel]- 0.08);
-        })
-         .attr("y", function(d, index) {
-            return y(d.healthcare - 0.2);
-        })
-    
+  circles.data(censusData)
+        .enter().append('text')
+        .attr("x", function(d) {
+          return x(+d[currentAxisXLabel]);
+      })
+        .attr("y", function(d) {
+          return y(d.healthcare);
+      })
+        .attr("class", "circleText")
         .attr("text-anchor", "middle")
         .text(function(d){
             return d.abbr;})
-        .attr('fill', 'white')
-        .attr('font-size', 9);
   
   
     // X-axis
@@ -164,31 +160,31 @@ d3.csv("/assets/data/data.csv", function(error, censusData) {
 
   chart.append("g")
        .attr("class", "x axis")
-       .attr("transform", "translate(0," + chartHeight + ")")
+       .attr("transform", `translate(0,${height})`)
        .call(xAxis);
     
 
   chart.append("text")
        .attr("class", "label")
-       .attr("transform", "translate(" + (chartWidth / 2) + " ," + (chartHeight - chartMargin.top+ 60) + ")")
+       .attr("transform", `translate(${width / 2},${height - margin.top+ 60})`)
        .style("text-anchor", "middle")
-       .text('In Poverty (%) ');
+       .text('Poverty');
 
   // Y-axis
   yAxis = d3.axisLeft(y);
             
   chart.append("g")
         .attr("class", "axis")
-        .attr("transform", "translate(" + padding + ",0)")
+        .attr("transform", `translate(${padding},0)`)
         .call(yAxis);       
                 
  
   chart.append("text")
        .attr("class", "label")
        .attr("transform", "rotate(-90)")
-       .attr("y", 0 - (chartMargin.left + 4))
-       .attr("x", 0 - (chartHeight/ 2))
+       .attr("y", 0 - (margin.left))
+       .attr("x", 0 - (height/ 2))
        .attr("dy", "1em")
        .style("text-anchor", "middle")
-       .text('Lacks healthcare (%)');
+       .text('Healthcare');
 });

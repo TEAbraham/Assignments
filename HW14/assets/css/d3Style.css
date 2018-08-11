@@ -2,6 +2,15 @@
  * =========
  * Add styling to your d3 chart with this file. */
 
+ .circleText {
+ font: 10px sans-serif;
+ fill: white;
+ text-anchor: middle;
+ background: green;
+ padding-top: 5px;
+ }
+
+
  .tooltip {
   position: absolute;
   width: 135px;
