@@ -4,215 +4,197 @@
 // =========
 // Follow your written instructions and create a scatter plot with D3.js.
 
+// Define SVG area dimensions
 var svgWidth = 960;
 var svgHeight = 500;
 
-var margin = {
-  top: 20,
-  right: 40,
-  bottom: 80,
-  left: 100
+// Define the chart's margins as an object
+var chartMargin = {
+  top: 30,
+  right: 30,
+  bottom: 30,
+  left: 30
 };
-
-var width = svgWidth - margin.left - margin.right;
-var height = svgHeight - margin.top - margin.bottom;
-
-// Create an SVG wrapper, append an SVG group that will hold our chart,
-// and shift the latter by left and top margins.
+// Define dimensions of the chart area
+var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
+var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+var padding = 25;  // Padding around canvas, i.e. replaces the 0 of scale
+var formatPercent = d3.format('.2%');
+// Select body, append SVG area to it, and set the dimensions
 var svg = d3
   .select(".chart")
-  .append("svg")
-  .attr("width", svgWidth)
-  .attr("height", svgHeight);
+    .append("svg")
+    .attr("height", svgHeight)
+    .attr("width", svgWidth)
+  // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
+  .append("g")
+    .attr("transform", "translate(" + chartMargin.right + ", " + chartMargin.top + ")");
+// Append and SVG group
+var chart = svg.append("g");
+// Configure a band scale, with a range between 0 and the chartWidth and a padding of 0.1 (10%)
 
-// Append an SVG group
-var chartGroup = svg.append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`);
-
-// Initial Params
-var chosenXAxis = "hair_length";
-
-// function used for updating x-scale var upon click on axis label
-function xScale(censusData, chosenXAxis) {
-  // create scales
-  var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
-      d3.max(censusData, d => d[chosenXAxis]) * 1.2
-    ])
-    .range([0, width]);
-
-  return xLinearScale;
-
-}
-
-// function used for updating xAxis var upon click on axis label
-function renderAxes(newXScale, xAxis) {
-  var bottomAxis = d3.axisBottom(newXScale);
-
-  xAxis.transition()
-    .duration(1000)
-    .call(bottomAxis);
-
-  return xAxis;
-}
-
-// function used for updating circles group with a transition to
-// new circles
-function renderCircles(circlesGroup, newXScale, chosenXaxis) {
-
-  circlesGroup.transition()
-    .duration(1000)
-    .attr("cx", d => newXScale(d[chosenXAxis]));
-
-  return circlesGroup;
-}
-
-// function used for updating circles group with new tooltip
-function updateToolTip(chosenXAxis, circlesGroup) {
-
-  if (chosenXAxis === "hair_length") {
-    var label = "Hair Length:";
-  }
-  else {
-    var label = "# of Albums:";
-  }
-
-  var toolTip = d3.tip()
+d3.select(".chart")
+    .append("div")
     .attr("class", "tooltip")
-    .offset([80, -60])
-    .html(function(d) {
-      return (`${d.rockband}<br>${label} ${d[chosenXAxis]}`);
-    });
+    .style("opacity", 0);
 
-  circlesGroup.call(toolTip);
+// Load data f
+d3.csv("../data/data.csv", function(error, censusData) {
+  for (var i = 0; i < censusData.length; i++){
+        
+        console.log(censusData[i].abbr)
+  } 
+  if (error) throw error;
+  censusData.forEach(function(d) {
 
-  circlesGroup.on("mouseover", function(data) {
-    toolTip.show(data);
-  })
-    // onmouseout event
-    .on("mouseout", function(data, index) {
-      toolTip.hide(data);
-    });
+      d.poverty = +d.poverty;
+      d.healthcare = +d.healthcare;
 
-  return circlesGroup;
-}
-
-// Retrieve data from the CSV file and execute everything below
-d3.csv("../data/data.csv", function(err, censusData) {
-  if (err) throw err;
-
-  // parse data
-  censusData.forEach(function(data) {
-    data.hair_length = +data.hair_length;
-    data.num_hits = +data.num_hits;
-    data.num_albums = +data.num_albums;
+  
   });
+  // Scale the range of the data
+  var x = d3.scaleLinear().range([0, chartWidth]);
 
-  // xLinearScale function above csv import
-  var xLinearScale = xScale(censusData, chosenXAxis);
+// Create a linear scale, with a range between the chartHeight and 0.
+  var y= d3.scaleLinear().range([chartHeight, 0]);
 
-  // Create y scale function
-  var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(censusData, d => d.num_hits)])
-    .range([height, 0]);
+  var xAxis = d3.axisBottom(x);
 
-  // Create initial axis functions
-  var bottomAxis = d3.axisBottom(xLinearScale);
-  var leftAxis = d3.axisLeft(yLinearScale);
+  var yAxis = d3.axisLeft(y);
 
-  // append x axis
-  var xAxis = chartGroup.append("g")
-    .classed("x-axis", true)
-    .attr("transform", `translate(0, ${height})`)
-    .call(bottomAxis);
 
-  // append y axis
-  chartGroup.append("g")
-    .call(leftAxis);
 
-  // append initial circles
-  var circlesGroup = chartGroup.selectAll("circle")
-    .data(censusData)
-    .enter()
-    .append("circle")
-    .attr("cx", d => xLinearScale(d[chosenXAxis]))
-    .attr("cy", d => yLinearScale(d.num_hits))
-    .attr("r", 20)
-    .attr("fill", "lightblue")
-    .attr("opacity", ".5");
+  var xValue = function(d) { return x(d.poverty);};
+  var yValue = function(d) { return y(d.healthcare);};
 
-  // Create group for  2 x- axis labels
-  var labelsGroup = chartGroup.append("g")
-    .attr("transform", `translate(${width / 2}, ${height + 20})`);
+// var xValueline =d3.line()
+    //.x(function(d) { return x(d.poverty); }),
 
-  var hairLengthLabel = labelsGroup.append("text")
-    .attr("x", 0)
-    .attr("y", 20)
-    .attr("value", "hair_length") // value to grab for event listener
-    .classed("active", true)
-    .text("Hair Metal Ban Hair Length (inches)");
+//var yvalueline = d3.line()
+   // .y(function(d) { return y(d.healthcare); });
 
-  var albumsLabel = labelsGroup.append("text")
-    .attr("x", 0)
-    .attr("y", 40)
-    .attr("value", "num_albums") // value to grab for event listener
-    .classed("inactive", true)
-    .text("# of Albums Released");
+  // var colorValue = function(d) { return d.abbr;},
 
-  // append y axis
-  chartGroup.append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
-    .attr("x", 0 - (height / 2))
-    .attr("dy", "1em")
-    .classed("axis-text", true)
-    .text("Number of Billboard 500 Hits");
+  // color = d3.schemeCategory10;
+ 
+  //xScale = x
+      //.domain([d3.min(censusData, xValue)-1, d3.max(censusData, xValue)+1])
+       //.range([0,chartWidth]);
+  
+  //yScale = y
+      //.domain([d3.min(censusData, yValue)-1, d3.max(censusData, yValue)+1])
+      //.range([chartHeight,0]);
 
-  // updateToolTip function above csv import
-  var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+  function findMinAndMax(i) {
+        xMin = d3.min(censusData, function(d) {
+            return +d[i] * 0.8;
+        });
 
-  // x axis labels event listener
-  labelsGroup.selectAll("text")
-    .on("click", function() {
-      // get value of selection
-      var value = d3.select(this).attr("value");
-      if (value !== chosenXAxis) {
+        xMax =  d3.max(censusData, function(d) {
+            return +d[i] * 1.1;
+        });
 
-        // replaces chosenXaxis with value
-        chosenXAxis = value;
+        yMax = d3.max(censusData, function(d) {
+            return +d.healthcare * 1.1;
+        });
+  };
+    
+  var currentAxisXLabel = "poverty";
 
-        // console.log(chosenXAxis)
+    // Call findMinAndMax() with 'poverty' as default
+  findMinAndMax(currentAxisXLabel);
 
-        // functions here found above csv import
-        // updates x scale for new data
-        xLinearScale = xScale(censusData, chosenXAxis);
+    // Set the domain of an axis to extend from the min to the max value of the data column
+  xScale=x.domain([xMin, xMax]);
+  yScale=y.domain([0, yMax]);
+      
+  // Add the scatterplot
+  var toolTip = d3.tip()
+        .attr("class", "tooltip")
+        .html(function(d) {
+            var state = d.abbr;
+            var poverty = +d.poverty;
+            var healthcare = +d.healthcare;
+            return (d.State + "<br> In Poverty: " + poverty + "%<br> Lack Healthcare: " + healthcare + "%");
+      });
 
-        // updates x axis with transition
-        xAxis = renderAxes(xLinearScale, xAxis);
+  chart.call(toolTip);
+                
 
-        // updates circles with new x values
-        circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
 
-        // updates tooltips with new info
-        circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+  // Circles
+  circles = chart.selectAll('circle')
+        .data(censusData)
+        .enter().append('circle')
+        .attr("class", "circle")
+        .attr("cx", function(d, index) {
+            return x(+d[currentAxisXLabel]);
+        })
+        .attr("cy", function(d, index) {
+            return y(d.healthcare);
+        })   
+        .attr('r','10')
+        .attr('stroke','black')
+        .attr('stroke-width',1)
+        .style('fill', "lightblue")
+        .attr("class", "circleText")
+        // add listeners on text too since it is on top of circle
+        .on("mouseover", function(d) {
+          toolTip.show(d);
+        })
+        // onmouseout event
+        .on("mouseout", function(d, index) {
+          toolTip.hide(d);
+        });              
+     
+  
+    // Add Text Labels
+  circles.append('text')
+         .attr("x", function(d, index) {
+            return x(+d[currentAxisXLabel]- 0.08);
+        })
+         .attr("y", function(d, index) {
+            return y(d.healthcare - 0.2);
+        })
+    
+        .attr("text-anchor", "middle")
+        .text(function(d){
+            return d.abbr;})
+        .attr('fill', 'white')
+        .attr('font-size', 9);
+  
+  
+    // X-axis
+  xAxis = d3.axisBottom(x);
 
-        // changes classes to change bold text
-        if (chosenXAxis === "num_albums") {
-          albumsLabel
-            .classed("active", true)
-            .classed("inactive", false);
-          hairLengthLabel
-            .classed("active", false)
-            .classed("inactive", true);
-        }
-        else {
-          albumsLabel
-            .classed("active", false)
-            .classed("inactive", true);
-          hairLengthLabel
-            .classed("active", true)
-            .classed("inactive", false);
-        }
-      }
-    });
+
+  chart.append("g")
+       .attr("class", "x axis")
+       .attr("transform", "translate(0," + chartHeight + ")")
+       .call(xAxis);
+    
+
+  chart.append("text")
+       .attr("class", "label")
+       .attr("transform", "translate(" + (chartWidth / 2) + " ," + (chartHeight - chartMargin.top+ 60) + ")")
+       .style("text-anchor", "middle")
+       .text('In Poverty (%) ');
+
+  // Y-axis
+  yAxis = d3.axisLeft(y);
+            
+  chart.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(" + padding + ",0)")
+        .call(yAxis);       
+                
+ 
+  chart.append("text")
+       .attr("class", "label")
+       .attr("transform", "rotate(-90)")
+       .attr("y", 0 - (chartMargin.left + 4))
+       .attr("x", 0 - (chartHeight/ 2))
+       .attr("dy", "1em")
+       .style("text-anchor", "middle")
+       .text('Lacks healthcare (%)');
 });
