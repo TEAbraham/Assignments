@@ -33,7 +33,7 @@ d3.select(".chart")
     .style("opacity", 0);
 
 // Load data f
-d3.csv("../data/data.csv", function(error, censusData) {
+d3.csv("/../data/data.csv", function(error, censusData) {
   for (var i = 0; i < censusData.length; i++){
         
         console.log(censusData[i].abbr)
