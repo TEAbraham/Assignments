@@ -1,9 +1,3 @@
-// D3 Scatterplot Assignment
-
-// Students:
-// =========
-// Follow your written instructions and create a scatter plot with D3.js.
-
 // Define SVG area dimensions
 var svgWidth = 960;
 var svgHeight = 500;
