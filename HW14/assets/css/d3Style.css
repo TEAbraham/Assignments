@@ -51,3 +51,7 @@
   fill: red;
   cursor: pointer;
 }
+
+.label {
+  font: 20 px sans-serif;
+}
