@@ -5,13 +5,13 @@ html {
 }
 
 h1{
-  color: #cc5500;
-  text-align: center;
-  font-size: 80px;
+  color: #cc5500 !important;
+  font-size: 72px !important;
 }
 
 body {
-  color: navy;
+  color: navy !important;
+  font-size: 24px !important;
   padding-bottom: 80px;
 }
 
@@ -23,8 +23,8 @@ body {
   padding-top: 20px;
   padding-bottom: 40px;
   text-align: center;
-  color: white;
-  background-color: navy;
+  color: white !important;
+  background-color: navy !important;
 }
 
 #footer p {
