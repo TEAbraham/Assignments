@@ -5,7 +5,9 @@ html {
 }
 
 h1{
-  color: #cc5500 !important;
+  color: #cc5500;
+  text-align: center;
+  font-size: 80px;
 }
 
 body {
