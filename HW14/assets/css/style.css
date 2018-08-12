@@ -1,12 +1,11 @@
-/* .iframeContainer {
-  padding: 20px;
-  border: 1px solid #e3e3e3;
-} */
 
-/* Sticky Footer rules (https://getbootstrap.com/examples/sticky-footer/) */
 html {
   position: relative;
   min-height: 100%;
+}
+
+h1{
+  color: #cc5500 !important;
 }
 
 body {
@@ -22,10 +21,11 @@ body {
   padding-top: 20px;
   padding-bottom: 40px;
   text-align: center;
-  background-color: #f5f5f5;
+  color: navy;
 }
 
 #footer p {
   margin: 0;
   font-size: 16px;
+  color: white;
 }
