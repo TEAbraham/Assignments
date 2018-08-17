@@ -97,14 +97,14 @@ function createMap() {
     });
 
 
-    var baseLayers = {
+    var baseLayer = {
         "High Contrast": highContrastMap,
         "Street": streetMap,
         "Dark": darkMap,
         "Satellite": satellite
     };
 
-    var overlays = {
+    var overLayer = {
         "Earthquakes": earthquakes,
         "Plate Boundaries": plateBoundary,
     };
@@ -112,22 +112,10 @@ function createMap() {
     var myMap = L.map('myMap', {
         center: [40, -99],
         zoom: 4.3,
-        // timeDimension: true,
-        // timeDimensionOptions: {
-        //     timeInterval: "2018-04-01/2018-04-05",
-        //     period: "PT1H"
-        // },
-        // timeDimensionControl: true,
         layers: [streetMap, earthquakes, plateBoundary]
     });
 
-    L.control.layers(baseLayers, overlays).addTo(myMap);
-    // L.timeDimension.earthquakes.geoJson(earthquakes).addTo(myMap);
-    // L.control.timeDimension().addTo(myMap);
-    // var player = new L.TimeDimension.Player({}, timeDimension).addTo(myMap);
-
-    // var tdWmsLayer = L.timeDimension.layer.wms(wmsLayer);
-    // tdWmsLayer.addTo(map);
+    L.control.layers(baseLayer, overLayer).addTo(myMap);
 
     var legend = L.control({ position: 'bottomright' });
 
