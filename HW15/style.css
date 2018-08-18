@@ -1,13 +1,7 @@
-html{
-    background-color:black;
-}
-
-body{
-    background-color: black;
-}
-
+html,
+body,
 #map{
-    height: 900px;
+    height: 100%;
 }
 
 .legend {
@@ -22,7 +16,3 @@ body{
     margin-right: 8px;
     opacity: 0.7;
 }
-
-.leaflet-bottom.leaflet-left{
-    width: 90%;
-  }

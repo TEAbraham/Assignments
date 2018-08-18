@@ -12,17 +12,17 @@ function createFeatures(quakeData) {
 
   var earthquakes = L.geoJson(quakeData, {
     onEachFeature: function (feature, layer){
-      layer.bindPopup("<h3>" + feature.properties.place + "<br> Magnitude: " + feature.properties.mag +
-      "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+      layer.bindPopup(`<h4>${feature.properties.place}<br> Magnitude: ${feature.properties.mag}
+      </h4><hr><h6>${new Date(feature.properties.time)}</h6>`,{
+          autoPan: true,
+      });
     },
     pointToLayer: function (feature, latlng) {
       return new L.circle(latlng,
         {radius: getRadius(feature.properties.mag),
           fillColor: getColor(feature.properties.mag),
           fillOpacity: .7,
-          stroke: true,
-          color: "black",
-          weight: .5
+          stroke: false
       })
     }
   });
@@ -33,15 +33,18 @@ function createFeatures(quakeData) {
 function createMap(earthquakes) {
 
   var satelliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    maxZoom: 18,
     id: "mapbox.satellite",
     accessToken: API_KEY
   });
   var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    maxZoom: 18,
     id: "mapbox.dark",
     accessToken: API_KEY
   });
 
   var lightMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    maxZoom: 18,
     id: "mapbox.light",
     accessToken: API_KEY
   });
@@ -56,11 +59,11 @@ function createMap(earthquakes) {
 
   var overlayMaps = {
     Earthquakes: earthquakes,
-    "Tectonic Plates": tectonicPlates
+    Plates: tectonicPlates
   };
 
   var myMap = L.map("map", {
-    center: [45, -90],
+    center: [35, 0],
     zoom: 2,
     layers: [satelliteMap, earthquakes, tectonicPlates]
   });
@@ -74,9 +77,7 @@ function createMap(earthquakes) {
    });
 
 
-  L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-  }).addTo(myMap);
+  L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 
   var legend = L.control({position: 'bottomright'});
 
@@ -87,9 +88,9 @@ function createMap(earthquakes) {
               labels = [];
 
     for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    div.innerHTML +=
+        `<i style="background:${getColor(grades[i] + 1)}"></i>`+
+        grades[i] + (grades[i + 1] ? `&ndash;${grades[i + 1]}<br>` : '+');
     }
     return div;
   };
@@ -98,12 +99,18 @@ function createMap(earthquakes) {
 }
 
 function getColor(d) {
-  return d > 5 ? '#F30' :
-  d > 4  ? '#F60' :
-  d > 3  ? '#F90' :
-  d > 2  ? '#FC0' :
-  d > 1   ? '#FF0' :
-            '#9F3';
+  if (d > 5){
+      return 'Maroon'}
+  else if (d > 4){
+      return 'OrangeRed'}
+  else if (d > 3){
+      return 'Orange'}  
+  else if (d > 2){
+      return 'Yellow'}
+  else if (d > 1){
+      return 'YellowGreen'}
+  else{
+      return 'Green'}
 }
 
 function getRadius(value){
