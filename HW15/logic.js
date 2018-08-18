@@ -2,10 +2,10 @@ var quakeApi = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_we
 
 var plateApi = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
 
-
 d3.json(quakeApi, function(data) {
 
     createFeatures(data.features);
+            
 });
 
 function createFeatures(quakeData) {       
@@ -15,7 +15,7 @@ function createFeatures(quakeData) {
       layer.bindPopup(`<h3>${feature.properties.place}<br> Magnitude: ${feature.properties.mag}
       </h3><hr><h5>${new Date(feature.properties.time)}</h5>`,{
           autoPan: true,
-      });
+      })
     },
     pointToLayer: function (feature, latlng) {
       return new L.circle(latlng,
@@ -27,7 +27,7 @@ function createFeatures(quakeData) {
     }
   });
 
-  createMap(earthquakes)
+  createMap(earthquakes);
 }
 
 function createMap(earthquakes) {
@@ -63,7 +63,7 @@ function createMap(earthquakes) {
   };
 
   var myMap = L.map("map", {
-    center: [35, 0],
+    center: [15, 0],
     zoom: 2,
     layers: [satelliteMap, earthquakes, tectonicPlates]
   });
@@ -96,6 +96,13 @@ function createMap(earthquakes) {
   };
 
   legend.addTo(myMap);
+
+  sliderControl = L.control.sliderControl({
+    position: "bottomleft",
+    layer: earthquakes
+  });
+  myMap.addControl(sliderControl);
+  sliderControl.startSlider();
 }
 
 function getColor(d) {
