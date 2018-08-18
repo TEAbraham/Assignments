@@ -12,8 +12,8 @@ function createFeatures(quakeData) {
 
   var earthquakes = L.geoJson(quakeData, {
     onEachFeature: function (feature, layer){
-      layer.bindPopup(`<h4>${feature.properties.place}<br> Magnitude: ${feature.properties.mag}
-      </h4><hr><h6>${new Date(feature.properties.time)}</h6>`,{
+      layer.bindPopup(`<h3>${feature.properties.place}<br> Magnitude: ${feature.properties.mag}
+      </h3><hr><h5>${new Date(feature.properties.time)}</h5>`,{
           autoPan: true,
       });
     },
