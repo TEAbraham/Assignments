@@ -5,28 +5,37 @@ html {
 }
 
 h1 {
-  color: #cc5500 !important;
+  color: #581845 !important;
   font-size: 72px !important;
 }
 
 h2 {
-  color: navy !important;
+  color: #FFC30F !important;
   font-size: 36px !important;
 }
 
 h6 {
-  color: #cc5500 !important;
+  color: #FF5733 !important;
   font-size: 20px !important;
   text-align: center !important;
 }
 
 p {
   text-indent: 50px;
+  color: #581845;
+}
+
+#dates {
+  text-indent: 30px;
+  text-align: justify;
+  color: #581845;
 }
 
 body {
   font-size: 24px !important;
+  font-family: Verdana, Geneva, sans-serif !important;
   padding-bottom: 80px;
+  background-color: #6699cc!important;
 }
 
 #footer {
@@ -37,12 +46,12 @@ body {
   padding-top: 20px;
   padding-bottom: 40px;
   text-align: center;
-  color: white !important;
-  background-color: navy !important;
+  background-color: #581845 !important;
 }
 
 #footer p {
   margin: 0;
   font-size: 16px;
+  color: #FFC30F !important;
 
 }

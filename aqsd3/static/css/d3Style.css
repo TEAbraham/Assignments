@@ -3,29 +3,30 @@
  * Add styling to your d3 chart with this file. */
  body{
   font-size: 20px;
-  font-family: sans-serif;
+  font-family: 'Barlow Condensed' sans-serif !important;
+  background-color: #b0d7fd !important;
 }
 
 .axis-text-x {
-  fill: navy;
+  fill: #9003cf ;
   text-anchor: middle;
 }
   
 .axis-text-y {
-  fill: navy;
+  fill: #9003cf ;
   text-anchor: middle;
 }
 
 .active {
   font-weight: 900;
-  fill: #cc5500;
+  fill: #581845;
   transition: fill 0.5s ease-out;
   text-anchor: middle;
 }
 
 .inactive {
   font-weight: lighter;
-  fill: navy;
+  fill: #9003cf ;
   transition: fill 0.5s ease-out;
   text-anchor: middle;
 }
@@ -37,15 +38,15 @@
 
 .tooltip {
   position: absolute;
-  width: 150px;
-  height: 150px;
-  padding: 2px;
-  padding-top: 8px;
+  width: 300px;
+  height: 125px;
+  padding: 10px;
+  padding-bottom: 80px;
   font: 12px sans-serif;
   color: white;
-  text-align: center;
-  background: #cc5500;
+  text-align: center !important;
+  background: #581845;
   border: 0;
   border-radius: 10px;
-  opacity: .5;
+  opacity: .5 ;
 }
