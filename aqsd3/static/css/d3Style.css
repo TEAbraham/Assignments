@@ -8,25 +8,25 @@
 }
 
 .axis-text-x {
-  fill: #9003cf ;
+  fill: purple ;
   text-anchor: middle;
 }
   
 .axis-text-y {
-  fill: #9003cf ;
+  fill: purple ;
   text-anchor: middle;
 }
 
 .active {
   font-weight: 900;
-  fill: #581845;
+  fill: navy;
   transition: fill 0.5s ease-out;
   text-anchor: middle;
 }
 
 .inactive {
   font-weight: lighter;
-  fill: #9003cf ;
+  fill: white;
   transition: fill 0.5s ease-out;
   text-anchor: middle;
 }
@@ -45,7 +45,7 @@
   font: 12px sans-serif;
   color: white;
   text-align: center !important;
-  background: #581845;
+  background: navy;
   border: 0;
   border-radius: 10px;
   opacity: .5 ;

@@ -295,9 +295,9 @@ d3.csv(pmurl).then(data1 => {
                                 .transition()
                                 .duration(500)
                                 .attr("r", 5)
-                                .attr("fill", function (d) {if (d["parameter"]==="81102"){return "#C70039"}
-                                                        else if (d["parameter"]==="42101"){return "#FF5733"}
-                                                        else {return "#FFC30F"}})
+                                .attr("fill", function (d) {if (d["parameter"]==="81102"){return "#1D8348"}
+                                                        else if (d["parameter"]==="42101"){return "#FFC30F"}
+                                                        else {return "#C70039"}})
                                 .attr("opacity", 0.75);
                         })
         
