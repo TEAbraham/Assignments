@@ -42,7 +42,7 @@
   height: 125px;
   padding: 10px;
   padding-bottom: 80px;
-  font: 12px sans-serif;
+  font: 12px sans-serif !important;
   color: white;
   text-align: center !important;
   background: navy;

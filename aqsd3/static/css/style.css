@@ -32,7 +32,7 @@ p {
 }
 
 body {
-  font-size: 24px !important;
+  font-size: 24px;
   font-family: Verdana, Geneva, sans-serif !important;
   padding-bottom: 80px;
   background-color: #6699cc!important;
