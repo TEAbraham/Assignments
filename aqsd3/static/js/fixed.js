@@ -28,6 +28,16 @@ var svg = d3.select(".chart")
 
 var chart = svg.append("g");
 
+//Append a defs (for definition) element to your SVG
+var defs = svg.append("defs");
+
+//Append a radialGradient element to the defs and give it a unique id
+var radialGradient = defs.append("radialGradient")
+    .attr("id", "greenSphere")
+    .attr("cx", "35%")    //The x-center of the gradient
+    .attr("cy", "35%")    //The y-center of the gradient
+    .attr("r", "60%");   //The radius of the gradient
+
 
 function go(bdate, edate){
 d3.csv(pmurl).then(data1 => {
@@ -88,7 +98,46 @@ d3.csv(pmurl).then(data1 => {
             // set the domain of the axes
             xScale.domain(xRan);
             yScale.domain([yMin, yMax])
-            
+
+            //All of the "official" pollutants in our Solar System
+            var pollutants = [
+                {pollutant: "81102", color: "#1D8348"},
+                {pollutant: "42101", color: "#FFC30F"},
+                {pollutant: "44201", color: "#C70039"},
+            ];
+
+            var pollutantGradients = svg.append("defs").selectAll("radialGradient")
+                .data(pollutants)
+                .enter().append("radialGradient")
+                //Create a unique id per "pollutant"
+                .attr("id", function(d){return d.pollutant;})
+                .attr("cx", "35%") //Move the x-center location towards the left
+                .attr("cy", "35%") //Move the y-center location towards the top
+                .attr("r", "60%"); //Increase the size of the "spread" of the gradient
+
+            //Add colors to the gradient
+            //First a lighter color in the center
+            pollutantGradients.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", function(d) {
+                return d3.rgb(d.color).brighter(1);
+            });
+
+            //Then the actual color almost halfway
+            pollutantGradients.append("stop")
+            .attr("offset", "50%")
+            .attr("stop-color", function(d) {
+                return d.color;
+            });
+
+            //Finally a darker color at the outside
+            pollutantGradients.append("stop")
+            .attr("offset",  "100%")
+            .attr("stop-color", function(d) {
+                return d3.rgb(d.color).darker(1.75);
+            });
+
+                        
             // create chart
             chart.selectAll("circle")
                 .data(alldata)
@@ -101,8 +150,8 @@ d3.csv(pmurl).then(data1 => {
                     return yScale(d["value"]);
                 })
                 .attr("r", 5)
-                .attr("fill", "#1D8348")
-                .attr("opacity", 0.75)
+                .attr("fill", "url(#81102)")
+                .attr("opacity", 1)
                 // display tooltip on click
                 .on("mouseover", function (d) {
                     toolTip.show(d);
@@ -122,6 +171,7 @@ d3.csv(pmurl).then(data1 => {
             // create y-axis
             chart.append("g")
                 .attr("class", "y-axis")
+                .attr("transform", `translate(-10,0)`)
                 .call(yAxis)
         
         
@@ -276,12 +326,15 @@ d3.csv(pmurl).then(data1 => {
 
                     d3.selectAll("circle")
                         .transition()
-                        .duration(1000)
+                        .duration(2000)
                         .ease(d3.easeLinear)
                         .on("start", function () {
                             d3.select(this)
-                                .attr("opacity", 0.50)
-                                .attr("r", 10)
+                                .attr("r", 5)
+                                .attr("fill", function(d) {
+                                    return `url(#${d["parameter"]})`;
+                                })
+                                .attr("opacity", 0.75);
         
                         })
                         .attr("cx", function (d) {
@@ -293,12 +346,12 @@ d3.csv(pmurl).then(data1 => {
                         .on("end", function () {
                             d3.select(this)
                                 .transition()
-                                .duration(500)
+                                .duration(2000)
                                 .attr("r", 5)
-                                .attr("fill", function (d) {if (d["parameter"]==="81102"){return "#1D8348"}
-                                                        else if (d["parameter"]==="42101"){return "#FFC30F"}
-                                                        else {return "#C70039"}})
-                                .attr("opacity", 0.75);
+                                .attr("fill", function(d) {
+                                    return `url(#${d["parameter"]})`;
+                                })
+                                .attr("opacity", 1);
                         })
         
         
@@ -316,12 +369,3 @@ d3.csv(pmurl).then(data1 => {
 
 go();
 
-d3.select('#to').on('keyup', function() {
-    // prevent form submission
-    d3.event.stopPropagation();
-    d3.event.preventDefault();
-    // later, submit form?
-    bdate = d3.select('#from').node();
-    edate = d3.select(this).node();
-    go(bdate, edate);
-  });
