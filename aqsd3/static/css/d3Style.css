@@ -51,6 +51,10 @@
   opacity: .5 ;
 }
 
+#circles:hover{
+  r: 10;
+}
+
 .zoom {
   fill: none;
   pointer-events: all;

@@ -311,7 +311,7 @@ d3.csv(pmurl).then(data1 => {
                                         .attr("fill", function(d) {
                                             return `url(#${d["parameter"]})`;
                                         })
-                                        .attr("opacity", 0.75);
+                                        .attr("opacity", 1);
                 
                                 })
                                 .attr("cx", function (d) {
@@ -323,7 +323,7 @@ d3.csv(pmurl).then(data1 => {
                                 .on("end", function () {
                                     d3.select(this)
                                         .transition()
-                                        .duration(2000)
+                                        .duration(1000)
                                         .attr("r", 5)
                                         .attr("fill", function(d) {
                                             return `url(#${d["parameter"]})`;
