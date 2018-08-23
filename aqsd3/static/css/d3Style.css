@@ -2,7 +2,7 @@
  * =========
  * Add styling to your d3 chart with this file. */
  body{
-  font-size: 20px;
+  font-size: 20px ;
   font-family: 'Barlow Condensed' sans-serif !important;
   background-color: #b0d7fd !important;
 }
@@ -51,11 +51,7 @@
   opacity: .5 ;
 }
 
-.hidden {
-  display: none;
-}
-
 .zoom {
   fill: none;
-  pointer-events: auto;
+  pointer-events: all;
 }
