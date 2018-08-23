@@ -50,3 +50,12 @@
   border-radius: 10px;
   opacity: .5 ;
 }
+
+.hidden {
+  display: none;
+}
+
+.zoom {
+  fill: none;
+  pointer-events: auto;
+}

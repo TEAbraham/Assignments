@@ -18,7 +18,7 @@ var parseTime = d3.timeParse("%Y%m%dT%H%M-%S%L")
 
 // Create an SVG wrapper, append an svg that will hold our chart and shift the latter by left and top margins
 
-var svg = d3.select(".chart")
+var svg = d3.select("#chart")
     .append("svg")
     .attr("height", svgHeight)
     .attr("width", svgWidth)
