@@ -68,7 +68,7 @@ var vis = function(data) {
             brokenUp.push({
               place: v.place,
               time: v.time,
-              hour: v.time.split(' ')[1],
+              hour: v.time.substr(9,2),
               pollutant: pollutant,
               value: v[pollutant]
             });
@@ -330,22 +330,30 @@ var vis = function(data) {
         .range(radiusRange);
     });
 
-    mapSVG.selectAll('.location')
-      .data(data.locations)
-      .enter().append('circle')
-        .attr('class', 'location')
-        .attr('cx', function(d) {
-          return d.x ;
-        })
-        .attr('cy', function(d) {
-          return d.y;
-        })
-        .on('click', function(d) {
-          controller.selectStation(d.id, d.eng_name + '<br />' + d.full_name);
-          d3.event.stopPropagation();
-        });
-    mapSVG.on('click', function() {
-      controller.deselectStation();
+    d3.json("data/chicago.json", function(json) {
+      var center = d3.geo.centroid(json)
+      var scale  = 50000;
+      var offset = [250, 250];
+      var projection = d3.geo.mercator().scale(scale).center(center)
+          .translate(offset);
+      var path = d3.geo.path().projection(projection);
+      mapSVG.selectAll('.location')
+        .data(data.locations)
+        .enter().append('circle')
+          .attr('class', 'location')
+          .attr('cx', function(d) {
+            return d.x ;
+          })
+          .attr('cy', function(d) {
+            return d.y;
+          })
+          .on('click', function(d) {
+            controller.selectStation(d.id, d.eng_name + '<br />' + d.full_name);
+            d3.event.stopPropagation();
+          });
+      mapSVG.on('click', function() {
+        controller.deselectStation();
+      });
     });
 
     // draw legend
@@ -387,7 +395,7 @@ var vis = function(data) {
             return i * dy;
           })
           .attr('r', function(d) {
-            return Math.abs(d.value);
+            return d.value;
           });
       mapLegend.selectAll('text.legend-element')
         .data(legendData)
@@ -408,42 +416,61 @@ var vis = function(data) {
       (pollutantKey === 'all') && (pollutantKey = 'value')
 
       // color map
-      mapSVG.selectAll('.map')
-        .classed('active', function() {
-          return (opt.scope === 'all');
-        })
-        .transition()
-          .style('fill', function() {
-            return colors[opt.pollutant][1];
+      d3.json("data/chicago.json", function(json) {
+        var center = d3.geo.centroid(json)
+        var scale  = 50000;
+        var offset = [250, 250];
+        var projection = d3.geo.mercator().scale(scale).center(center)
+            .translate(offset);
+        var path = d3.geo.path().projection(projection);
+        mapSVG.selectAll('.map')
+          .classed('active', function() {
+            return (opt.scope === 'all');
           })
-          .style('stroke', function() {
-            return colors[opt.pollutant][8];
+          .attr("d", path)
+          .transition()
+            .style('fill', function() {
+              return colors[opt.pollutant][1];
+            })
+            .style('stroke', function() {
+              return colors[opt.pollutant][8];
+            });
           });
 
       // update locations
-      mapSVG.selectAll('.location')
-        .classed('active', function(d) {
-          return (opt.scope === 'station' && opt.id === d.id);
-        })
-        .transition()
-          .attr('r', function(d) {
-            var len = data.byStation.length;
-            for (var i = 0; i < len; i++) {
-              if (data.byStation[i].key === d.id) {
-                return radius[opt.pollutant](data.byStation[i][pollutantKey]);
-              }
-            }
+      d3.json("data/chicago.json", function(json) {
+        var center = d3.geo.centroid(json)
+        var scale  = 50000;
+        var offset = [250, 250];
+        var projection = d3.geo.mercator().scale(scale).center(center)
+            .translate(offset);
+        var path = d3.geo.path().projection(projection);
+        mapSVG.selectAll('.location')
+          .classed('active', function(d) {
+            return (opt.scope === 'station' && opt.id === d.id);
           })
-          .style('fill', function(d) {
-            var len = data.byStation.length;
-            for (var i = 0; i < len; i++) {
-              if (data.byStation[i].key === d.id) {
-                return scaledColor(data.byStation[i][pollutantKey], opt.pollutant, [4, 9]);
+          .attr("d", path)
+          .transition()
+            .attr('r', function(d) {
+              var len = data.byStation.length;
+              for (var i = 0; i < len; i++) {
+                if (data.byStation[i].key === d.id) {
+                  return radius[opt.pollutant](data.byStation[i][pollutantKey]);
+
+                }
               }
-            }
-          })
-          .style('stroke', function(d) {
-            return colors[opt.pollutant][8];
+            })
+            .style('fill', function(d) {
+              var len = data.byStation.length;
+              for (var i = 0; i < len; i++) {
+                if (data.byStation[i].key === d.id) {
+                  return scaledColor(data.byStation[i][pollutantKey], opt.pollutant, [4, 9]);
+                }
+              }
+            })
+            .style('stroke', function(d) {
+              return colors[opt.pollutant][8];
+            });
           });
     };
 
@@ -472,10 +499,11 @@ var vis = function(data) {
       layeredStations.push(stack(station.byPollutant));
     });
 
+
     var width = 418;
     var height = 325;
     var radialSVG = d3.select('svg.radial')
-      .attr('wdith', width)
+      .attr('width', width)
       .attr('height', height)
       .append('g')
       .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2 + 5) + ')');
@@ -490,7 +518,7 @@ var vis = function(data) {
       .domain([0, d3.max(data.byStation, function(station) {
         return d3.max(station.byPollutant, function(pollutant) {
           return d3.max(pollutant.byHour, function(hour) {
-            return hour.y0 + hour.y;
+            return hour.y0 + hour.y; 
           });
         });
       })])
@@ -641,7 +669,7 @@ var vis = function(data) {
       }
 
       radialSVG.selectAll('.layer')
-        .data(layers)
+        .data(layers) 
         .classed('active', function(d) {
           return (opt.pollutant === d.key);
         })
@@ -679,7 +707,7 @@ var vis = function(data) {
 
     var gap = 1;
     var tileWidth = (width - axisWidth) / 24 - gap;
-    var tileHeight = (height - axisHeight) / 17 - gap;
+    var tileHeight = 1.25*(height - axisHeight) / 30 - gap;
 
     // initial plot
     tilesSVG.selectAll('.tile')
@@ -691,11 +719,11 @@ var vis = function(data) {
         .attr('rx', 3)
         .attr('ry', 1)
         .attr('x', function (d) { 
-          var x = d.time.substr(8,2) * (tileWidth + gap);
+          var x = d.time.substr(3,2) * (tileWidth + gap);
           return x
         })
         .attr('y', function(d) {
-          var y = d.time.substr(11,2) * (tileHeight + gap);
+          var y = d.time.substr(9,2) * (tileHeight + gap);
           return y;
         });
 

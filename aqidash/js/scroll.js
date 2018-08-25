@@ -287,6 +287,7 @@ d3.csv(pmurl).then(data1 => {
                             
                             currentAxisLabelY = clickedAxis;
 
+
                             if (currentAxisLabelY==='O3'){currentAxisLabelY=o3data;}
                             else if (currentAxisLabelY==='CO'){currentAxisLabelY=codata;}
                             else if (currentAxisLabelY==='PM10'){currentAxisLabelY=pemdata;}
